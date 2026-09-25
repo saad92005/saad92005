@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="610" viewBox="0 0 1180 610" role="img" aria-label="Saad (saad92005) — Full-Stack Engineer, AI Engineer, SaaS Builder and student. Featured projects: omnira, attendtrack, arabic-dialect-mt-nlp.">
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="610" viewBox="0 0 1180 610" role="img" aria-label="Saad (saad92005) — Full-Stack Engineer, AI Engineer, SaaS Builder and student. Featured projects: aes-app, saad-portfolio, omnira, arabic-dialect-mt-nlp, attendtrack.">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#07111F"/>
@@ -145,25 +145,25 @@
         <circle cx="510" cy="329" r="3" fill="#22D3EE"/>
         <text x="522" y="333">TypeScript</text>
 
-        <rect x="602" y="314" width="82" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
-        <circle cx="616" cy="329" r="3" fill="#22D3EE"/>
-        <text x="628" y="333">Next.js</text>
+        <rect x="602" y="314" width="76" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="616" cy="329" r="3" fill="#10B981"/>
+        <text x="628" y="333">Flutter</text>
 
-        <rect x="694" y="314" width="72" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
-        <circle cx="708" cy="329" r="3" fill="#22D3EE"/>
-        <text x="720" y="333">React</text>
+        <rect x="688" y="314" width="66" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="702" cy="329" r="3" fill="#10B981"/>
+        <text x="714" y="333">Dart</text>
 
-        <rect x="776" y="314" width="76" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
-        <circle cx="790" cy="329" r="3" fill="#10B981"/>
-        <text x="802" y="333">Python</text>
+        <rect x="764" y="314" width="76" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="778" cy="329" r="3" fill="#22D3EE"/>
+        <text x="790" y="333">Python</text>
 
-        <rect x="862" y="314" width="98" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
-        <circle cx="876" cy="329" r="3" fill="#10B981"/>
-        <text x="888" y="333">PostgreSQL</text>
+        <rect x="850" y="314" width="82" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="864" cy="329" r="3" fill="#EAB308"/>
+        <text x="876" y="333">Firebase</text>
 
-        <rect x="970" y="314" width="76" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
-        <circle cx="984" cy="329" r="3" fill="#22D3EE"/>
-        <text x="996" y="333">Tauri</text>
+        <rect x="942" y="314" width="104" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="956" cy="329" r="3" fill="#22D3EE"/>
+        <text x="968" y="333">HTML/CSS</text>
       </g>
 
       <line x1="496" y1="368" x2="1122" y2="368" stroke="#94A3B8" stroke-opacity="0.12"/>
@@ -172,14 +172,14 @@
       <text x="496" y="394" font-size="12" letter-spacing="2" fill="#64748B">SELECTED PROJECTS</text>
 
       <g font-size="13.5">
-        <text x="496" y="420" fill="#22D3EE" font-weight="600">omnira</text>
-        <text x="620" y="420" fill="#94A3B8">AI desktop assistant, built as a personal monorepo project</text>
+        <text x="496" y="420" fill="#22D3EE" font-weight="600">aes-app</text>
+        <text x="608" y="420" fill="#94A3B8">Flutter/Firebase business management platform</text>
 
-        <text x="496" y="446" fill="#22D3EE" font-weight="600">attendtrack</text>
-        <text x="620" y="446" fill="#94A3B8">Attendance tracking application</text>
+        <text x="496" y="446" fill="#22D3EE" font-weight="600">saad-portfolio</text>
+        <text x="680" y="446" fill="#94A3B8">Personal portfolio site</text>
 
-        <text x="496" y="472" fill="#22D3EE" font-weight="600">arabic-dialect-mt-nlp</text>
-        <text x="820" y="472" fill="#94A3B8">Arabic dialect NLP / machine translation</text>
+        <text x="496" y="472" fill="#22D3EE" font-weight="600">omnira</text>
+        <text x="608" y="472" fill="#94A3B8">AI desktop assistant, built as a monorepo</text>
       </g>
 
       <line x1="496" y1="500" x2="1122" y2="500" stroke="#94A3B8" stroke-opacity="0.12"/>
