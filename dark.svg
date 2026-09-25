@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="610" viewBox="0 0 1180 610" role="img" aria-label="Saad (saad92005) — Full-Stack Engineer, AI Engineer, SaaS Builder and student. Featured projects: omnira, attendtrack, arabic-dialect-mt-nlp.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111F"/>
+      <stop offset="0.55" stop-color="#030712"/>
+      <stop offset="1" stop-color="#0B1220"/>
+    </linearGradient>
+    <linearGradient id="accentSweep" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="0.5" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#10B981"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="-1 0;1 0;-1 0" dur="10s" repeatCount="indefinite"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7C3AED" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panelFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0F172A" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity="0.30"/>
+    </linearGradient>
+    <linearGradient id="pillFill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7C3AED" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0.18"/>
+    </linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#94A3B8" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <clipPath id="frameClip">
+      <rect x="1" y="1" width="1178" height="608" rx="24"/>
+    </clipPath>
+    <filter id="softBlur"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+
+  <g clip-path="url(#frameClip)">
+    <rect width="1180" height="610" fill="url(#bg)"/>
+    <rect width="1180" height="610" fill="url(#grid)"/>
+    <circle cx="140" cy="120" r="220" fill="url(#glow1)" filter="url(#softBlur)">
+      <animate attributeName="cx" values="140;180;140" dur="14s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1040" cy="500" r="240" fill="url(#glow2)" filter="url(#softBlur)">
+      <animate attributeName="cy" values="500;460;500" dur="16s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- particles -->
+    <g fill="#94A3B8" fill-opacity="0.35">
+      <circle cx="220" cy="90" r="1.4"><animate attributeName="cy" values="90;70;90" dur="7s" repeatCount="indefinite"/></circle>
+      <circle cx="980" cy="140" r="1.6"><animate attributeName="cy" values="140;120;140" dur="9s" repeatCount="indefinite"/></circle>
+      <circle cx="760" cy="560" r="1.3"><animate attributeName="cy" values="560;540;560" dur="8s" repeatCount="indefinite"/></circle>
+      <circle cx="120" cy="480" r="1.5"><animate attributeName="cy" values="480;460;480" dur="10s" repeatCount="indefinite"/></circle>
+    </g>
+
+    <!-- outer frame border -->
+    <rect x="3" y="3" width="1174" height="604" rx="22" fill="none" stroke="url(#accentSweep)" stroke-opacity="0.55" stroke-width="1.5"/>
+
+    <!-- top terminal header -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+      <rect x="0" y="0" width="1180" height="46" fill="#0B1220" fill-opacity="0.55"/>
+      <line x1="0" y1="46" x2="1180" y2="46" stroke="#22D3EE" stroke-opacity="0.15"/>
+      <circle cx="30" cy="23" r="5.5" fill="#EF4444"/>
+      <circle cx="50" cy="23" r="5.5" fill="#EAB308"/>
+      <circle cx="70" cy="23" r="5.5" fill="#22C55E"/>
+      <text x="96" y="28" font-size="13" fill="#94A3B8">saad92005@profile:~</text>
+      <circle cx="1088" cy="23" r="4" fill="#10B981">
+        <animate attributeName="opacity" values="1;0.35;1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="1148" y="28" font-size="12" fill="#10B981" text-anchor="end">[ ONLINE ]</text>
+    </g>
+
+    <!-- LEFT PANEL -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+      <rect x="32" y="70" width="420" height="508" rx="18" fill="url(#panelFill)" stroke="#7C3AED" stroke-opacity="0.35"/>
+      <text x="58" y="104" font-size="12" letter-spacing="2" fill="#22D3EE">[ VISUAL.MAP ]</text>
+      <line x1="58" y1="116" x2="426" y2="116" stroke="#94A3B8" stroke-opacity="0.15"/>
+
+      <!-- abstract dot-matrix identity mark (no photo supplied) -->
+      <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13" fill="#7C3AED" text-anchor="middle">
+        <text x="242" y="180" opacity="0">· · + * # * + · ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.1s" fill="freeze"/></text>
+        <text x="242" y="202" opacity="0">· + * # % % # * + ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.2s" fill="freeze"/></text>
+        <text x="242" y="224" opacity="0">+ * # % @ @ % # * +<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.3s" fill="freeze"/></text>
+        <text x="242" y="246" opacity="0" fill="#22D3EE">* # % @ · S · @ % # *<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.4s" fill="freeze"/></text>
+        <text x="242" y="268" opacity="0">+ * # % @ @ % # * +<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.5s" fill="freeze"/></text>
+        <text x="242" y="290" opacity="0">· + * # % % # * + ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.6s" fill="freeze"/></text>
+        <text x="242" y="312" opacity="0">· · + * # * + · ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.7s" fill="freeze"/></text>
+        <text x="242" y="334" opacity="0" fill="#64748B">· · · · · · · · ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.8s" fill="freeze"/></text>
+      </g>
+      <rect x="150" y="150" width="185" height="215" fill="none" stroke="#22D3EE" stroke-opacity="0.25" rx="10"/>
+      <line x1="150" y1="150" x2="335" y2="150" stroke="#22D3EE" stroke-opacity="0.5">
+        <animate attributeName="y1" values="150;365;150" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="y2" values="150;365;150" dur="6s" repeatCount="indefinite"/>
+      </line>
+
+      <text x="242" y="410" font-size="14" fill="#F8FAFC" text-anchor="middle" font-weight="600">Full-Stack · AI · SaaS</text>
+      <text x="242" y="432" font-size="12" fill="#94A3B8" text-anchor="middle">building shipped, working software</text>
+
+      <line x1="58" y1="470" x2="426" y2="470" stroke="#94A3B8" stroke-opacity="0.15"/>
+      <text x="58" y="500" font-size="13" fill="#94A3B8">~/saad92005 <tspan fill="#22D3EE">$</tspan> build --ship</text>
+      <rect x="252" y="489" width="7" height="14" fill="#22D3EE">
+        <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+      </rect>
+
+      <text x="58" y="540" font-size="11" fill="#64748B">student · early-career engineer</text>
+      <text x="58" y="558" font-size="11" fill="#64748B">github.com/saad92005</text>
+    </g>
+
+    <!-- RIGHT PANEL -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+      <rect x="470" y="70" width="678" height="508" rx="18" fill="url(#panelFill)" stroke="#22D3EE" stroke-opacity="0.3"/>
+      <text x="496" y="104" font-size="12" letter-spacing="2" fill="#7C3AED">[ SYSTEM.INFO ]</text>
+      <text x="1120" y="104" font-size="12" fill="#64748B" text-anchor="end">./profile.sh</text>
+      <line x1="496" y1="116" x2="1122" y2="116" stroke="#94A3B8" stroke-opacity="0.15"/>
+
+      <text x="496" y="150" font-size="26" font-weight="700" fill="#F8FAFC">Saad</text>
+      <text x="496" y="174" font-size="13" fill="#22D3EE">@saad92005</text>
+
+      <!-- role rotation -->
+      <g font-size="14" fill="#94A3B8">
+        <text x="496" y="200" opacity="0">&gt; ROLE&#160;&#160;&#160;&#160;&#160;&#160; Full-Stack Engineer
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.22;0.25" dur="12s" repeatCount="indefinite"/>
+        </text>
+        <text x="496" y="200" opacity="0">&gt; ROLE&#160;&#160;&#160;&#160;&#160;&#160; AI Engineer
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.30;0.47;0.50" dur="12s" repeatCount="indefinite"/>
+        </text>
+        <text x="496" y="200" opacity="0">&gt; ROLE&#160;&#160;&#160;&#160;&#160;&#160; SaaS Builder
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.55;0.72;0.75" dur="12s" repeatCount="indefinite"/>
+        </text>
+        <text x="496" y="200" opacity="0">&gt; ROLE&#160;&#160;&#160;&#160;&#160;&#160; Student Engineer
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.80;0.97;1" dur="12s" repeatCount="indefinite"/>
+        </text>
+      </g>
+
+      <text x="496" y="226" font-size="14" fill="#94A3B8">&gt; FOCUS&#160;&#160;&#160;&#160;&#160; <tspan fill="#F8FAFC">AI / LLM apps · Full-Stack Web · NLP</tspan></text>
+      <text x="496" y="252" font-size="14" fill="#94A3B8">&gt; BUILDING&#160;&#160; <tspan fill="#F8FAFC">shipped, real-world projects while studying</tspan></text>
+
+      <line x1="496" y1="276" x2="1122" y2="276" stroke="#94A3B8" stroke-opacity="0.12"/>
+
+      <!-- stack pills -->
+      <text x="496" y="302" font-size="12" letter-spacing="2" fill="#64748B">STACK</text>
+      <g font-size="12.5" fill="#F8FAFC">
+        <rect x="496" y="314" width="96" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="510" cy="329" r="3" fill="#22D3EE"/>
+        <text x="522" y="333">TypeScript</text>
+
+        <rect x="602" y="314" width="82" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="616" cy="329" r="3" fill="#22D3EE"/>
+        <text x="628" y="333">Next.js</text>
+
+        <rect x="694" y="314" width="72" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="708" cy="329" r="3" fill="#22D3EE"/>
+        <text x="720" y="333">React</text>
+
+        <rect x="776" y="314" width="76" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="790" cy="329" r="3" fill="#10B981"/>
+        <text x="802" y="333">Python</text>
+
+        <rect x="862" y="314" width="98" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="876" cy="329" r="3" fill="#10B981"/>
+        <text x="888" y="333">PostgreSQL</text>
+
+        <rect x="970" y="314" width="76" height="30" rx="15" fill="url(#pillFill)" stroke="#7C3AED" stroke-opacity="0.4"/>
+        <circle cx="984" cy="329" r="3" fill="#22D3EE"/>
+        <text x="996" y="333">Tauri</text>
+      </g>
+
+      <line x1="496" y1="368" x2="1122" y2="368" stroke="#94A3B8" stroke-opacity="0.12"/>
+
+      <!-- projects -->
+      <text x="496" y="394" font-size="12" letter-spacing="2" fill="#64748B">SELECTED PROJECTS</text>
+
+      <g font-size="13.5">
+        <text x="496" y="420" fill="#22D3EE" font-weight="600">omnira</text>
+        <text x="620" y="420" fill="#94A3B8">AI desktop assistant, built as a personal monorepo project</text>
+
+        <text x="496" y="446" fill="#22D3EE" font-weight="600">attendtrack</text>
+        <text x="620" y="446" fill="#94A3B8">Attendance tracking application</text>
+
+        <text x="496" y="472" fill="#22D3EE" font-weight="600">arabic-dialect-mt-nlp</text>
+        <text x="820" y="472" fill="#94A3B8">Arabic dialect NLP / machine translation</text>
+      </g>
+
+      <line x1="496" y1="500" x2="1122" y2="500" stroke="#94A3B8" stroke-opacity="0.12"/>
+
+      <!-- links -->
+      <text x="496" y="526" font-size="12" letter-spacing="2" fill="#64748B">LINKS</text>
+      <g font-size="13.5" fill="#F8FAFC">
+        <circle cx="502" cy="546" r="3" fill="#7C3AED"/>
+        <text x="512" y="551">github.com/saad92005</text>
+      </g>
+
+      <text x="1122" y="562" font-size="11" fill="#334155" text-anchor="end">generated · terminal ui</text>
+    </g>
+  </g>
+
+  <rect x="1" y="1" width="1178" height="608" rx="24" fill="none" stroke="#0B1220" stroke-width="2"/>
+</svg>
