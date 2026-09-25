@@ -77,22 +77,19 @@
       <text x="58" y="104" font-size="12" letter-spacing="2" fill="#22D3EE">[ VISUAL.MAP ]</text>
       <line x1="58" y1="116" x2="426" y2="116" stroke="#94A3B8" stroke-opacity="0.15"/>
 
-      <!-- abstract dot-matrix identity mark (no photo supplied) -->
-      <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13" fill="#7C3AED" text-anchor="middle">
-        <text x="242" y="180" opacity="0">· · + * # * + · ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.1s" fill="freeze"/></text>
-        <text x="242" y="202" opacity="0">· + * # % % # * + ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.2s" fill="freeze"/></text>
-        <text x="242" y="224" opacity="0">+ * # % @ @ % # * +<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.3s" fill="freeze"/></text>
-        <text x="242" y="246" opacity="0" fill="#22D3EE">* # % @ · S · @ % # *<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.4s" fill="freeze"/></text>
-        <text x="242" y="268" opacity="0">+ * # % @ @ % # * +<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.5s" fill="freeze"/></text>
-        <text x="242" y="290" opacity="0">· + * # % % # * + ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.6s" fill="freeze"/></text>
-        <text x="242" y="312" opacity="0">· · + * # * + · ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.7s" fill="freeze"/></text>
-        <text x="242" y="334" opacity="0" fill="#64748B">· · · · · · · · ·<animate attributeName="opacity" values="0;1" dur=".6s" begin="0.8s" fill="freeze"/></text>
+      <!-- monogram identity mark (no photo supplied) -->
+      <g opacity="0">
+        <animate attributeName="opacity" values="0;1" dur=".8s" begin="0.1s" fill="freeze"/>
+        <circle cx="242" cy="248" r="98" fill="none" stroke="#94A3B8" stroke-opacity="0.15" stroke-width="1"/>
+        <circle cx="242" cy="248" r="82" fill="none" stroke="url(#accentSweep)" stroke-opacity="0.65" stroke-width="2" stroke-dasharray="8 10" stroke-linecap="round">
+          <animateTransform attributeName="transform" type="rotate" from="0 242 248" to="360 242 248" dur="30s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="242" cy="166" r="4" fill="#22D3EE">
+          <animateMotion dur="30s" repeatCount="indefinite" path="M 0 0 A 82 82 0 1 1 -0.1 0 Z"/>
+        </circle>
+        <circle cx="242" cy="248" r="64" fill="url(#panelFill)" stroke="#7C3AED" stroke-opacity="0.5" stroke-width="1.5"/>
+        <text x="242" y="266" font-size="56" font-weight="700" fill="#F8FAFC" text-anchor="middle">S</text>
       </g>
-      <rect x="150" y="150" width="185" height="215" fill="none" stroke="#22D3EE" stroke-opacity="0.25" rx="10"/>
-      <line x1="150" y1="150" x2="335" y2="150" stroke="#22D3EE" stroke-opacity="0.5">
-        <animate attributeName="y1" values="150;365;150" dur="6s" repeatCount="indefinite"/>
-        <animate attributeName="y2" values="150;365;150" dur="6s" repeatCount="indefinite"/>
-      </line>
 
       <text x="242" y="410" font-size="14" fill="#F8FAFC" text-anchor="middle" font-weight="600">Full-Stack · AI · SaaS</text>
       <text x="242" y="432" font-size="12" fill="#94A3B8" text-anchor="middle">building shipped, working software</text>
@@ -117,24 +114,23 @@
       <text x="496" y="150" font-size="26" font-weight="700" fill="#F8FAFC">Saad</text>
       <text x="496" y="174" font-size="13" fill="#22D3EE">@saad92005</text>
 
-      <!-- role rotation -->
-      <g font-size="14" fill="#94A3B8">
-        <text x="496" y="200" opacity="0">&gt; ROLE&#160;&#160;&#160;&#160;&#160;&#160; Full-Stack Engineer
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.22;0.25" dur="12s" repeatCount="indefinite"/>
+      <!-- info rows: right-aligned labels, left-aligned values -->
+      <g font-size="13" fill="#64748B" text-anchor="end">
+        <text x="580" y="200">ROLE</text>
+        <text x="580" y="226">FOCUS</text>
+        <text x="580" y="252">BUILDING</text>
+      </g>
+      <g font-size="14" fill="#F8FAFC">
+        <text x="596" y="200" opacity="0">Full-Stack Engineer <tspan fill="#64748B">·</tspan> AI Engineer <tspan fill="#64748B">·</tspan> SaaS Builder
+          <animate attributeName="opacity" values="0;1" dur=".6s" begin="0.9s" fill="freeze"/>
         </text>
-        <text x="496" y="200" opacity="0">&gt; ROLE&#160;&#160;&#160;&#160;&#160;&#160; AI Engineer
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.30;0.47;0.50" dur="12s" repeatCount="indefinite"/>
+        <text x="596" y="226" opacity="0">AI / LLM apps <tspan fill="#64748B">·</tspan> Full-Stack Web <tspan fill="#64748B">·</tspan> NLP
+          <animate attributeName="opacity" values="0;1" dur=".6s" begin="1.0s" fill="freeze"/>
         </text>
-        <text x="496" y="200" opacity="0">&gt; ROLE&#160;&#160;&#160;&#160;&#160;&#160; SaaS Builder
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.55;0.72;0.75" dur="12s" repeatCount="indefinite"/>
-        </text>
-        <text x="496" y="200" opacity="0">&gt; ROLE&#160;&#160;&#160;&#160;&#160;&#160; Student Engineer
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.80;0.97;1" dur="12s" repeatCount="indefinite"/>
+        <text x="596" y="252" opacity="0">shipped, real-world projects while studying
+          <animate attributeName="opacity" values="0;1" dur=".6s" begin="1.1s" fill="freeze"/>
         </text>
       </g>
-
-      <text x="496" y="226" font-size="14" fill="#94A3B8">&gt; FOCUS&#160;&#160;&#160;&#160;&#160; <tspan fill="#F8FAFC">AI / LLM apps · Full-Stack Web · NLP</tspan></text>
-      <text x="496" y="252" font-size="14" fill="#94A3B8">&gt; BUILDING&#160;&#160; <tspan fill="#F8FAFC">shipped, real-world projects while studying</tspan></text>
 
       <line x1="496" y1="276" x2="1122" y2="276" stroke="#94A3B8" stroke-opacity="0.12"/>
 
