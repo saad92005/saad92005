@@ -1,42 +1,82 @@
-<a href="https://saadshahid-omega.vercel.app">
-  <img src="assets/header.svg" width="100%" alt="Muhammad Saad — AI Engineer & Full-Stack Developer">
+<a href="https://saadshahid-portfolio.vercel.app">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg">
+    <img src="assets/hero-dark.svg" width="100%" alt="Muhammad Saad. I build AI software that ships, and agents that ask before they act.">
+  </picture>
 </a>
 
-<p align="center">
-  <a href="https://saadshahid-omega.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0b1022?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio"></a>
-  <a href="https://www.linkedin.com/in/saadshahidpk"><img src="https://img.shields.io/badge/LinkedIn-0b1022?style=for-the-badge&logo=linkedin&logoColor=22d3ee" alt="LinkedIn"></a>
-  <a href="mailto:saad39587@gmail.com"><img src="https://img.shields.io/badge/Email-0b1022?style=for-the-badge&logo=gmail&logoColor=f472b6" alt="Email"></a>
-</p>
+I'm a CS student at UMT in Lahore. Most of what I build is an AI feature wrapped in a lot of ordinary, careful engineering: auth, migrations, tests, CI and the parts that make it work for someone who isn't me. I like problems where the model is the easy bit and the hard part is making it trustworthy.
 
-I build **complete, working software around AI**: agents that act only with permission, retrieval systems that cite their sources, and business platforms that real teams use every day. Most of my projects ship with tests, CI, architecture docs and a live deployment.
+[portfolio ↗](https://saadshahid-portfolio.vercel.app) &nbsp;·&nbsp; [linkedin ↗](https://www.linkedin.com/in/saadshahidpk) &nbsp;·&nbsp; [saad39587@gmail.com](mailto:saad39587@gmail.com)
 
-<img src="assets/divider.svg" width="100%" alt="">
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/squiggle-light.svg">
+  <img src="assets/squiggle-dark.svg" width="100%" alt="">
+</picture>
 
-### ⚡ Featured work
+## Selected work
 
-<p>
-  <a href="https://github.com/saad92005/thinkdesk"><img src="assets/card-thinkdesk.svg" width="49%" alt="ThinkDesk: AI knowledge workspace with hybrid RAG, verified research and human-approved agents"></a>
-  <a href="https://github.com/saad92005/omnira"><img src="assets/card-omnira.svg" width="49%" alt="Omnira: permission-gated AI desktop agent"></a>
-</p>
-<p>
-  <a href="https://github.com/saad92005/aes-app"><img src="assets/card-aes.svg" width="49%" alt="AES App: field operations and business management platform"></a>
-  <a href="https://github.com/saad92005/arabic-dialect-mt-nlp"><img src="assets/card-arabic.svg" width="49%" alt="Arabic dialect machine translation with AraBERT"></a>
-</p>
+<a href="https://github.com/saad92005/thinkdesk">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="assets/plate-thinkdesk-light.svg">
+    <img src="assets/plate-thinkdesk-dark.svg" width="100%" alt="ThinkDesk: a chat answer drawing facts from two uploaded documents, with page citations">
+  </picture>
+</a>
 
-<p align="center">
-  <a href="https://thinkdesk-three.vercel.app"><b>▶ ThinkDesk live</b></a> &nbsp;·&nbsp;
-  <a href="https://omnira.netlify.app"><b>▶ Omnira web build</b></a>
-</p>
+A multi-tenant knowledge workspace. Retrieval is hybrid: vector and BM25 search fused with Reciprocal Rank Fusion, then reranked by a cross-encoder. Research mode only calls a finding *verified* when two separate documents back it up. Its agents draft Slack posts, but nothing is sent until a person approves it. 105 tests, including tenant isolation.
+**[code](https://github.com/saad92005/thinkdesk) · [live](https://thinkdesk-three.vercel.app)**
 
-<img src="assets/divider.svg" width="100%" alt="">
+<br>
 
-### 🧠 What I work with
+<a href="https://github.com/saad92005/omnira">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="assets/plate-omnira-light.svg">
+    <img src="assets/plate-omnira-dark.svg" width="100%" alt="Omnira: the assistant sets a timer through a tool call and replies with a checklist">
+  </picture>
+</a>
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=py,ts,dart,pytorch,fastapi,nodejs,react,nextjs,flutter,tailwind&theme=dark" alt="Python, TypeScript, Dart, PyTorch, FastAPI, Node.js, React, Next.js, Flutter, Tailwind"><br>
-  <img src="https://skillicons.dev/icons?i=tauri,postgres,prisma,firebase,docker,githubactions,vercel,netlify,git,vscode&theme=dark" alt="Tauri, PostgreSQL, Prisma, Firebase, Docker, GitHub Actions, Vercel, Netlify, Git, VS Code">
-</p>
+A desktop AI agent that can open apps, create files and set timers, but only through capabilities you've granted. It never sees a tool it isn't allowed to use. It has a provider-agnostic LLM layer, OAuth with PKCE, encrypted tokens, 8 ADRs, 131 tests and a real Windows installer.
+**[code](https://github.com/saad92005/omnira)**
 
-<p align="center">
-  <b>AI:</b> LLM apps & tool calling · hybrid RAG + reranking + evaluation · human-in-the-loop agents · transfer learning
-</p>
+<br>
+
+<a href="https://github.com/saad92005/aes-app">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="assets/plate-aes-light.svg">
+    <img src="assets/plate-aes-dark.svg" width="100%" alt="AES App dashboard: work orders by region">
+  </picture>
+</a>
+
+Operations software for an engineering services company. Work orders arrive automatically from Gmail, attendance is GPS-verified, and the payroll engine has a five-stage approval flow. It also does double-entry accounting and inventory for 12 roles, all from one Flutter codebase. The AI assistant goes through a server-side proxy, so no key ships in the app.
+**[code](https://github.com/saad92005/aes-app)**
+
+<br>
+
+<a href="https://github.com/saad92005/arabic-dialect-mt-nlp">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="assets/plate-arabic-light.svg">
+    <img src="assets/plate-arabic-dark.svg" width="100%" alt="Held-out chrF and BLEU for four Arabic dialect translation systems">
+  </picture>
+</a>
+
+Dialect Arabic → English translation on 688 held-out sentences across six dialects. Fine-tuning a pretrained MT model on about 1,100 dialect sentences takes BLEU from 13.0 to 29.0. The from-scratch and AraBERT + GRU baselines stay under 1 BLEU, and the write-up explains why.
+**[code + write-up](https://github.com/saad92005/arabic-dialect-mt-nlp)**
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/squiggle-light.svg">
+  <img src="assets/squiggle-dark.svg" width="100%" alt="">
+</picture>
+
+## What I reach for
+
+**Every day:** TypeScript, Python, Dart. React and Next.js on the web, Flutter on mobile, Tauri for desktop.<br>
+**Backends:** FastAPI, Fastify, PostgreSQL with Prisma or SQLAlchemy, and Firebase when the client already lives there.<br>
+**AI:** tool-calling agents with a human in the loop, hybrid retrieval with reranking and evals, and PyTorch with Hugging Face Transformers for fine-tuning.<br>
+**Shipping:** GitHub Actions, Docker, Vercel, Netlify and Render, plus pytest, Vitest and flutter test.
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/signature-light.svg">
+  <img src="assets/signature-dark.svg" width="220" alt="— Saad">
+</picture>

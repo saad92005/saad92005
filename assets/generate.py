@@ -1,189 +1,345 @@
-"""Generates the animated SVGs used in the profile README.
+"""Builds the profile README artwork.
 
-Pure SVG + CSS animations (no external fonts/scripts), so GitHub renders
-them reliably. Run: python assets/generate.py
+Every SVG is self-contained: fonts (OFL: Instrument Serif, Caveat, JetBrains Mono) are
+subset to the glyphs actually used and embedded, screenshots are embedded as JPEG, and
+animation is plain CSS. Nothing is fetched at view time, so GitHub's image proxy renders
+them exactly as designed. Each piece comes in a dark and a light variant.
+
+    python assets/generate.py            # needs fonttools + Pillow
 """
+import base64
+import io
+import json
 from pathlib import Path
 
-OUT = Path(__file__).parent
-FONT = "'Segoe UI', Inter, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif"
-MONO = "'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace"
+from fontTools import subset
+from fontTools.ttLib import TTFont
+from fontTools.varLib import instancer
+from PIL import Image
 
+HERE = Path(__file__).parent
+SRC = HERE / "src"          # fonts/ and screenshots/ live here
+OUT = HERE
 
-def header() -> str:
-    roles = [
-        "building AI agents that ask before they act",
-        "shipping RAG systems that cite their sources",
-        "turning business workflows into software",
-    ]
-    cycle = 12  # seconds for the full rotation
-    slot = cycle / len(roles)
-    role_css, role_svg = [], []
-    for i, text in enumerate(roles):
-        start = i * slot / cycle * 100
-        end = (i + 1) * slot / cycle * 100
-        type_end = start + (slot * 0.45) / cycle * 100
-        role_css.append(f"""
-      @keyframes r{i} {{
-        0%, {start:.2f}% {{ opacity: 0; clip-path: inset(0 100% 0 0); }}
-        {start + 0.01:.2f}% {{ opacity: 1; clip-path: inset(0 100% 0 0); }}
-        {type_end:.2f}% {{ opacity: 1; clip-path: inset(0 0 0 0); }}
-        {end - 1.5:.2f}% {{ opacity: 1; clip-path: inset(0 0 0 0); }}
-        {end:.2f}%, 100% {{ opacity: 0; clip-path: inset(0 0 0 0); }}
-      }}
-      .r{i} {{ animation: r{i} {cycle}s linear infinite; }}""")
-        role_svg.append(f'<text class="role r{i}" x="64" y="252">&gt; {text}</text>')
-
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340">
-  <style>
-    .title {{ font: 800 64px {FONT}; fill: #fff; letter-spacing: -1.5px; }}
-    .sub {{ font: 600 26px {FONT}; fill: url(#text); }}
-    .role {{ font: 500 22px {MONO}; fill: #a5f3fc; opacity: 0; }}
-    .meta {{ font: 500 17px {FONT}; fill: #94a3b8; }}
-    .blob {{ mix-blend-mode: screen; filter: blur(60px); }}
-    @keyframes driftA {{ 0%,100% {{ transform: translate(0,0) scale(1); }} 50% {{ transform: translate(120px,40px) scale(1.2); }} }}
-    @keyframes driftB {{ 0%,100% {{ transform: translate(0,0) scale(1.1); }} 50% {{ transform: translate(-140px,-30px) scale(0.9); }} }}
-    @keyframes driftC {{ 0%,100% {{ transform: translate(0,0); }} 50% {{ transform: translate(60px,-50px); }} }}
-    .a {{ animation: driftA 14s ease-in-out infinite; }}
-    .b {{ animation: driftB 18s ease-in-out infinite; }}
-    .c {{ animation: driftC 11s ease-in-out infinite; }}
-    @keyframes rise {{ from {{ opacity: 0; transform: translateY(14px); }} to {{ opacity: 1; transform: none; }} }}
-    .in1 {{ animation: rise .9s ease-out both; }}
-    .in2 {{ animation: rise .9s .25s ease-out both; }}
-    .in3 {{ animation: rise .9s .5s ease-out both; }}
-    @keyframes blink {{ 0%,49% {{ opacity: 1; }} 50%,100% {{ opacity: 0; }} }}
-    .cursor {{ animation: blink 1s steps(1) infinite; fill: #a5f3fc; }}
-    @keyframes pulse {{ 0%,100% {{ r: 5; opacity: 1; }} 50% {{ r: 9; opacity: .35; }} }}
-    .dot {{ animation: pulse 2s ease-in-out infinite; }}
-    @keyframes scan {{ from {{ transform: translateY(-40px); }} to {{ transform: translateY(380px); }} }}
-    .scan {{ animation: scan 6s linear infinite; }}
-    {''.join(role_css)}
-  </style>
-  <defs>
-    <linearGradient id="text" x1="0" x2="1">
-      <stop offset="0" stop-color="#22d3ee"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
-    </linearGradient>
-    <linearGradient id="scanG" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#22d3ee" stop-opacity="0"/><stop offset="1" stop-color="#22d3ee" stop-opacity=".12"/>
-    </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity=".05"/>
-    </pattern>
-    <clipPath id="card"><rect width="1200" height="340" rx="24"/></clipPath>
-  </defs>
-  <g clip-path="url(#card)">
-    <rect width="1200" height="340" fill="#070b18"/>
-    <circle class="blob a" cx="220" cy="80" r="190" fill="#4f46e5" opacity=".55"/>
-    <circle class="blob b" cx="980" cy="260" r="210" fill="#db2777" opacity=".40"/>
-    <circle class="blob c" cx="760" cy="40" r="150" fill="#0891b2" opacity=".50"/>
-    <rect width="1200" height="340" fill="url(#grid)"/>
-    <rect class="scan" width="1200" height="40" fill="url(#scanG)"/>
-    <g class="in1">
-      <circle class="dot" cx="72" cy="66" r="5" fill="#34d399"/>
-      <text class="meta" x="90" y="72">open to AI / software engineering roles · Lahore, Pakistan</text>
-    </g>
-    <text class="title in2" x="60" y="152">Muhammad Saad</text>
-    <text class="sub in3" x="62" y="196">AI Engineer &amp; Full-Stack Developer</text>
-    {''.join(role_svg)}
-    <text class="meta" x="64" y="300">TypeScript · Python · Flutter — agents, RAG, automation, SaaS</text>
-  </g>
-  <rect x=".5" y=".5" width="1199" height="339" rx="24" fill="none" stroke="#ffffff" stroke-opacity=".08"/>
-</svg>
-"""
-
-
-def card(name, tagline, lines, tags, accent1, accent2, badge):
-    tag_svg, x = [], 32
-    for t in tags:
-        w = 16 + len(t) * 8.4
-        tag_svg.append(
-            f'<rect x="{x}" y="232" width="{w:.0f}" height="28" rx="14" fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".1"/>'
-            f'<text class="tag" x="{x + w / 2:.0f}" y="251" text-anchor="middle">{t}</text>')
-        x += w + 8
-    body = "".join(f'<text class="body" x="32" y="{132 + i * 26}">{l}</text>' for i, l in enumerate(lines))
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="580" height="290" viewBox="0 0 580 290">
-  <style>
-    .name {{ font: 800 30px {FONT}; fill: #fff; letter-spacing: -.5px; }}
-    .tagline {{ font: 600 16px {FONT}; fill: url(#acc); }}
-    .body {{ font: 400 15px {FONT}; fill: #cbd5e1; }}
-    .tag {{ font: 600 12.5px {MONO}; fill: #e2e8f0; }}
-    .badge {{ font: 700 11px {MONO}; fill: #070b18; letter-spacing: 1px; }}
-    @keyframes spin {{ to {{ transform: rotate(360deg); }} }}
-    .spin {{ transform-origin: 290px 145px; animation: spin 8s linear infinite; }}
-    @keyframes glow {{ 0%,100% {{ opacity: .35; }} 50% {{ opacity: .7; }} }}
-    .glow {{ animation: glow 5s ease-in-out infinite; filter: blur(40px); }}
-    @keyframes shine {{ from {{ transform: translateX(-200px) skewX(-20deg); }} to {{ transform: translateX(800px) skewX(-20deg); }} }}
-    .shine {{ animation: shine 7s ease-in-out infinite; }}
-  </style>
-  <defs>
-    <linearGradient id="acc" x1="0" x2="1"><stop offset="0" stop-color="{accent1}"/><stop offset="1" stop-color="{accent2}"/></linearGradient>
-    <linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".07"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-    <clipPath id="outer"><rect width="580" height="290" rx="20"/></clipPath>
-    <clipPath id="inner"><rect x="2" y="2" width="576" height="286" rx="18"/></clipPath>
-  </defs>
-  <g clip-path="url(#outer)">
-    <g class="spin"><rect x="-200" y="-200" width="980" height="690" fill="url(#acc)"/><rect x="-200" y="145" width="980" height="345" fill="#1e293b"/></g>
-  </g>
-  <g clip-path="url(#inner)">
-    <rect width="580" height="290" fill="#0b1022"/>
-    <circle class="glow" cx="520" cy="30" r="110" fill="{accent1}"/>
-    <rect class="shine" x="0" y="0" width="120" height="290" fill="url(#sh)"/>
-    <rect x="32" y="34" width="{len(badge) * 8 + 20}" height="22" rx="11" fill="url(#acc)"/>
-    <text class="badge" x="{32 + (len(badge) * 8 + 20) / 2}" y="49.5" text-anchor="middle">{badge}</text>
-    <text class="name" x="32" y="94">{name}</text>
-    <text class="tagline" x="{40 + len(name) * 17}" y="93">{tagline}</text>
-    {body}
-    {''.join(tag_svg)}
-  </g>
-</svg>
-"""
-
-
-def divider() -> str:
-    return """<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="12" viewBox="0 0 1200 12">
-  <style>
-    @keyframes flow { from { transform: translateX(-400px); } to { transform: translateX(1200px); } }
-    .f { animation: flow 4s linear infinite; }
-  </style>
-  <defs>
-    <linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity="0"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6" stop-opacity="0"/></linearGradient>
-  </defs>
-  <rect y="5" width="1200" height="2" rx="1" fill="#64748b" fill-opacity=".25"/>
-  <rect class="f" y="4" width="400" height="4" rx="2" fill="url(#g)"/>
-</svg>
-"""
-
-
-CARDS = {
-    "card-thinkdesk": ("ThinkDesk", "AI knowledge workspace", [
-        "Hybrid RAG: vector + BM25, RRF fusion, cross-encoder rerank",
-        "Research mode verifies claims across separate documents",
-        "Agents draft actions, humans approve, then they execute",
-        "Multi-tenant SaaS · real billing · 105 pytest tests · CI",
-    ], ["FastAPI", "Next.js", "PostgreSQL", "Groq"], "#22d3ee", "#818cf8", "LIVE · FLAGSHIP"),
-    "card-omnira": ("Omnira", "permission-gated AI agent", [
-        "Voice + chat assistant that acts on your desktop",
-        "Tool calling behind user-granted capabilities",
-        "Vendor-agnostic LLM layer · OAuth PKCE · encrypted tokens",
-        "8 ADRs · 128 unit tests · CI · Windows installer",
-    ], ["Tauri", "React", "Fastify", "Prisma"], "#a78bfa", "#f472b6", "AI AGENT"),
-    "card-aes": ("AES App", "field operations platform", [
-        "Built for a real engineering services company",
-        "Work orders auto-imported from Gmail · GPS attendance",
-        "Payroll engine · double-entry accounting · inventory",
-        "12 roles with tailored access · PDF/Excel exports",
-    ], ["Flutter", "Dart", "Firebase", "Gmail API"], "#34d399", "#22d3ee", "PRODUCTION SOFTWARE"),
-    "card-arabic": ("Arabic MT", "low-resource NLP", [
-        "Dialect → English translation for 4 Arabic dialects",
-        "GRU Seq2Seq baseline vs fine-tuned AraBERT encoder",
-        "Transfer learning pipeline in PyTorch",
-        "Written up as an IEEE-format research paper",
-    ], ["PyTorch", "Transformers", "AraBERT"], "#fbbf24", "#f472b6", "NLP RESEARCH"),
+THEMES = {
+    "dark": dict(bg="#0f0f11", ink="#ece7df", muted="#8b867d", faint="#26252a", accent="#ff7a45", paper="#17171a", grain=0.07),
+    "light": dict(bg="#f7f4ee", ink="#1c1b18", muted="#76716a", faint="#e4dfd6", accent="#d9541e", paper="#ffffff", grain=0.05),
 }
 
+# ───────────────────────────── fonts ─────────────────────────────
+FONT_FILES = {
+    "serif": ("InstrumentSerif-Regular.ttf", None),
+    "serif-italic": ("InstrumentSerif-Italic.ttf", None),
+    "hand": ("Caveat[wght].ttf", 600),
+    "mono": ("JetBrainsMono[wght].ttf", 500),
+}
+_font_cache = {}
+
+
+def _base_font(key):
+    if key not in _font_cache:
+        file, weight = FONT_FILES[key]
+        f = TTFont(SRC / "fonts" / file)
+        if weight is not None and "fvar" in f:
+            f = instancer.instantiateVariableFont(f, {"wght": weight})
+        _font_cache[key] = f
+    return _font_cache[key]
+
+
+def width(key, text, size):
+    f = _base_font(key)
+    cmap, hmtx, upm = f.getBestCmap(), f["hmtx"], f["head"].unitsPerEm
+    return sum(hmtx[cmap.get(ord(c), cmap.get(ord("?")))][0] for c in text) * size / upm
+
+
+def font_face(key, family, text):
+    f = TTFont(io.BytesIO(_dump(_base_font(key))))
+    opts = subset.Options()
+    opts.layout_features = ["kern", "liga"]
+    s = subset.Subsetter(opts)
+    s.populate(text="".join(sorted(set(text + " "))))
+    s.subset(f)
+    data = base64.b64encode(_dump(f)).decode()
+    return f"@font-face{{font-family:'{family}';src:url(data:font/ttf;base64,{data}) format('truetype');}}"
+
+
+def _dump(f):
+    b = io.BytesIO()
+    f.save(b)
+    return b.getvalue()
+
+
+def faces(texts):
+    """texts: {font_key: all strings rendered in that font}"""
+    fam = {"serif": "S", "serif-italic": "SI", "hand": "H", "mono": "M"}
+    return "".join(font_face(k, fam[k], t) for k, t in texts.items() if t)
+
+
+def esc(s):
+    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def grain(t):
+    return f"""<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 {t['grain'] * 2.2} 0"/></filter>"""
+
+
+def jpeg_data(path, w, crop=None, q=82):
+    im = Image.open(path).convert("RGB")
+    if crop:
+        im = im.crop(crop)
+    im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+    b = io.BytesIO()
+    im.save(b, "JPEG", quality=q, optimize=True, progressive=True)
+    return f"data:image/jpeg;base64,{base64.b64encode(b.getvalue()).decode()}", im.width, im.height
+
+
+# ───────────────────────────── hero ─────────────────────────────
+NOW = [
+    "fine-tuning MT models for low-resource Arabic dialects",
+    "keeping API keys out of client apps",
+    "writing tests for the parts that handle money",
+]
+
+
+def hero(t):
+    W, H = 1200, 470
+    name, l2, l3 = "Muhammad Saad", "I build AI software that ships,", "and agents that ask before they act."
+    note = ["CS student, Lahore —", "still shipping"]
+    top_l, top_r = "SAAD92005 · LAHORE, PK", "AI ENGINEER / FULL-STACK"
+    x0 = 72
+    # underline the word "ships" in line 2
+    pre = width("serif-italic", "I build AI software that ", 46)
+    ships_w = width("serif-italic", "ships", 46)
+    ux0, ux1 = x0 + pre - 4, x0 + pre + ships_w + 6
+    name_w = width("serif", name, 112)
+
+    n = len(NOW)
+    cyc = 5.0 * n
+    ticker_css, ticker_svg = [], []
+    for i, line in enumerate(NOW):
+        a, b = i / n * 100, (i + 1) / n * 100
+        ticker_css.append(f"@keyframes t{i}{{0%,{a:.1f}%{{opacity:0;transform:translateY(8px)}}{a + 2.5:.1f}%,{b - 3:.1f}%{{opacity:1;transform:none}}{b:.1f}%,100%{{opacity:0;transform:translateY(-8px)}}}}"
+                          f".t{i}{{animation:t{i} {cyc}s 3.2s infinite both}}")
+        ticker_svg.append(f'<text class="mono now t{i}" x="{x0 + 118}" y="{H - 52}">{esc(line)}</text>')
+
+    css = faces({
+        "serif": name, "serif-italic": l2 + l3,
+        "hand": "".join(note), "mono": top_l + top_r + "currently →" + "".join(NOW),
+    })
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
+<style>{css}
+.serif{{font-family:S,serif}} .it{{font-family:SI,serif;font-style:normal}} .hand{{font-family:H,cursive}} .mono{{font-family:M,monospace;letter-spacing:.14em}}
+.name{{font-size:112px;fill:{t['ink']};letter-spacing:-.02em}}
+.line{{font-size:46px;fill:{t['muted']}}} .line .em{{fill:{t['ink']}}}
+.top{{font-size:13px;fill:{t['muted']}}} .now{{font-size:15px;fill:{t['ink']};letter-spacing:.02em;opacity:0}}
+.lbl{{font-size:13px;fill:{t['accent']}}} .note{{font-size:31px;fill:{t['accent']}}}
+@keyframes rise{{from{{opacity:0;transform:translateY(26px)}}to{{opacity:1;transform:none}}}}
+@keyframes fade{{from{{opacity:0}}to{{opacity:1}}}}
+@keyframes draw{{to{{stroke-dashoffset:0}}}}
+@keyframes rule{{from{{transform:scaleX(0)}}to{{transform:scaleX(1)}}}}
+@keyframes blink{{50%{{opacity:0}}}}
+.r1{{animation:rise .9s cubic-bezier(.2,.7,.2,1) .15s both}} .r2{{animation:rise .9s cubic-bezier(.2,.7,.2,1) .55s both}} .r3{{animation:rise .9s cubic-bezier(.2,.7,.2,1) .8s both}}
+.f0{{animation:fade 1s .05s both}} .f1{{animation:fade .8s 2.1s both}} .f2{{animation:fade .6s 3s both}}
+.rule{{transform-origin:{x0}px 0;animation:rule 1.2s cubic-bezier(.6,0,.2,1) .1s both}}
+.u{{stroke-dasharray:420;stroke-dashoffset:420;animation:draw .75s cubic-bezier(.5,0,.3,1) 1.45s forwards}}
+.arrow{{stroke-dasharray:300;stroke-dashoffset:300;animation:draw .8s ease-out 2.35s forwards}}
+.head{{stroke-dasharray:60;stroke-dashoffset:60;animation:draw .25s ease-out 3.1s forwards}}
+.caret{{animation:blink 1.05s steps(1) infinite}}
+{''.join(ticker_css)}
+</style>
+<defs>{grain(t)}</defs>
+<rect width="{W}" height="{H}" fill="{t['bg']}"/>
+<rect width="{W}" height="{H}" filter="url(#grain)" opacity="1"/>
+<g class="f0">
+  <text class="mono top" x="{x0}" y="58">{top_l}</text>
+  <text class="mono top" x="{W - x0}" y="58" text-anchor="end">{top_r}</text>
+</g>
+<rect class="rule" x="{x0}" y="76" width="{W - 2 * x0}" height="1" fill="{t['faint']}"/>
+<text class="serif name r1" x="{x0 - 4}" y="210">{name}</text>
+<text class="it line r2" x="{x0}" y="282">I build AI software that <tspan class="em">ships,</tspan></text>
+<text class="it line r3" x="{x0}" y="338">and agents that <tspan class="em">ask before they act.</tspan></text>
+<path class="u" d="M{ux0} 296 C {ux0 + 40} 290, {ux1 - 50} 300, {ux1} 292 M{ux0 + 14} 303 C {ux0 + 50} 299, {ux1 - 30} 305, {ux1 - 6} 300"
+      fill="none" stroke="{t['accent']}" stroke-width="3" stroke-linecap="round"/>
+<g class="f1">
+  <text class="hand note" x="{x0 + name_w + 70}" y="132">{note[0]}</text>
+  <text class="hand note" x="{x0 + name_w + 92}" y="166">{note[1]}</text>
+</g>
+<path class="arrow" d="M{x0 + name_w + 64} 146 C {x0 + name_w + 20} 150, {x0 + name_w + 4} 166, {x0 + name_w + 2} 186"
+      fill="none" stroke="{t['accent']}" stroke-width="2.4" stroke-linecap="round"/>
+<path class="head" d="M{x0 + name_w - 8} 174 L{x0 + name_w + 2} 188 L{x0 + name_w + 13} 176"
+      fill="none" stroke="{t['accent']}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="{x0}" y="{H - 96}" width="{W - 2 * x0}" height="1" fill="{t['faint']}"/>
+<g class="f2"><text class="mono lbl" x="{x0}" y="{H - 52}">CURRENTLY →</text></g>
+{''.join(ticker_svg)}
+</svg>
+"""
+
+
+
+def arrowhead(cx, cy, bx, by, size=13, spread=0.5):
+    import math
+    ang = math.atan2(by - cy, bx - cx)
+    p1 = (bx - size * math.cos(ang - spread), by - size * math.sin(ang - spread))
+    p2 = (bx - size * math.cos(ang + spread), by - size * math.sin(ang + spread))
+    return f"M{p1[0]:.1f} {p1[1]:.1f} L{bx} {by} L{p2[0]:.1f} {p2[1]:.1f}"
+
+# ───────────────────────────── project plates ─────────────────────────────
+def plate(t, num, title, stack, shot, note, note_xy, arrow, phone=False):
+    W, H = 1200, 640
+    x0 = 56
+    img_w = 330 if phone else 1000
+    data, iw, ih = jpeg_data(shot["path"], img_w * 2 if not phone else img_w * 2, shot.get("crop"))
+    iw, ih = iw / 2, ih / 2
+    max_h = H - 150
+    if ih > max_h:  # keep the frame inside the plate
+        scale = max_h / ih
+        iw, ih = iw * scale, ih * scale
+    ix = W - x0 - iw - (120 if phone else 0)
+    iy = 122
+    css = faces({"serif": title, "serif-italic": num, "hand": "".join(note), "mono": stack})
+    note_svg = "".join(f'<text class="hand" x="{note_xy[0]}" y="{note_xy[1] + i * 34}">{esc(l)}</text>' for i, l in enumerate(note))
+    ax, ay, bx, by = arrow
+    cx, cy = (ax + bx) / 2 + 30, min(ay, by) - 30
+    head = arrowhead(cx, cy, bx, by)
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
+<style>{css}
+.num{{font-family:SI,serif;font-size:64px;fill:{t['accent']}}}
+.title{{font-family:S,serif;font-size:58px;fill:{t['ink']};letter-spacing:-.01em}}
+.stack{{font-family:M,monospace;font-size:13px;letter-spacing:.14em;fill:{t['muted']}}}
+.hand{{font-family:H,cursive;font-size:30px;fill:{t['accent']}}}
+@keyframes rise{{from{{opacity:0;transform:translateY(18px)}}to{{opacity:1;transform:none}}}}
+@keyframes wipe{{from{{clip-path:inset(0 100% 0 0)}}to{{clip-path:inset(0 0 0 0)}}}}
+@keyframes lift{{from{{transform:translate(0,0)}}to{{transform:translate(10px,10px)}}}}
+@keyframes fade{{from{{opacity:0}}to{{opacity:1}}}}
+@keyframes draw{{to{{stroke-dashoffset:0}}}}
+.a1{{animation:rise .8s cubic-bezier(.2,.7,.2,1) .1s both}} .a2{{animation:rise .8s cubic-bezier(.2,.7,.2,1) .3s both}}
+.shot{{animation:wipe 1.1s cubic-bezier(.7,0,.2,1) .45s both}}
+.shadow{{animation:lift .5s ease-out 1.4s both}}
+.n{{animation:fade .6s 1.7s both}}
+.arr{{stroke-dasharray:900;stroke-dashoffset:900;animation:draw .8s ease-out 1.9s forwards}}
+.hd{{stroke-dasharray:60;stroke-dashoffset:60;animation:draw .2s ease-out 2.65s forwards}}
+</style>
+<defs>{grain(t)}<clipPath id="r"><rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" rx="{14 if phone else 6}"/></clipPath></defs>
+<rect width="{W}" height="{H}" fill="{t['bg']}"/>
+<rect width="{W}" height="{H}" filter="url(#grain)"/>
+<g class="a1"><text class="num" x="{x0}" y="92">{num}</text></g>
+<g class="a2"><text class="title" x="{x0 + 82}" y="90">{esc(title)}</text>
+<text class="stack" x="{W - x0}" y="84" text-anchor="end">{esc(stack)}</text></g>
+<g class="shot">
+  <rect class="shadow" x="{ix}" y="{iy}" width="{iw}" height="{ih}" rx="{14 if phone else 6}" fill="none" stroke="{t['accent']}" stroke-width="1.5"/>
+  <image href="{data}" x="{ix}" y="{iy}" width="{iw}" height="{ih}" clip-path="url(#r)" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" rx="{14 if phone else 6}" fill="none" stroke="{t['ink']}" stroke-opacity=".18"/>
+</g>
+<g class="n">{note_svg}</g>
+<path class="arr" d="M{ax} {ay} Q {cx} {cy} {bx} {by}" fill="none" stroke="{t['accent']}" stroke-width="2.4" stroke-linecap="round"/>
+<path class="hd" d="{head}" fill="none" stroke="{t['accent']}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+"""
+
+
+def chart_plate(t, metrics):
+    """Plate 04: real held-out results from the Arabic MT experiment."""
+    W, H, x0 = 1200, 640, 56
+    systems = [("marian_finetuned", "Marian, fine-tuned"), ("marian_zero_shot", "Marian, zero-shot"),
+               ("arabert_gru", "AraBERT + GRU"), ("gru_scratch", "GRU from scratch")]
+    rows = [(label, metrics["systems"][k]) for k, label in systems if k in metrics["systems"]]
+    n_test = rows[0][1]["n"]
+    title, stack, num = "Arabic dialect MT", "PYTORCH · TRANSFORMERS", "04"
+    note = ["pretraining does the", "heavy lifting"]
+    labels = "".join(l for l, _ in rows)
+    vals = "".join(f"{r['chrf']:.1f}{r['bleu']:.1f}" for _, r in rows)
+    caption = f"chrF / BLEU ON {n_test} HELD-OUT TATOEBA SENTENCES"
+    css = faces({"serif": title + labels, "serif-italic": num, "hand": "".join(note), "mono": stack + vals + caption + "chrFBLEU0123456789.·"})
+    bar_x, bar_w, top, gap = 380, 640, 170, 98
+    bars = []
+    for i, (label, r) in enumerate(rows):
+        y = top + i * gap
+        w = max(4, bar_w * r["chrf"] / 100)
+        delay = 0.5 + i * 0.18
+        bars.append(f"""
+<text class="lab a" style="animation-delay:{delay}s" x="{bar_x - 24}" y="{y + 30}" text-anchor="end">{esc(label)}</text>
+<rect x="{bar_x}" y="{y}" width="{bar_w}" height="44" fill="{t['faint']}" opacity=".55"/>
+<rect class="bar" style="animation-delay:{delay + .1}s" x="{bar_x}" y="{y}" width="{w:.1f}" height="44" fill="{t['accent'] if i == 0 else t['ink']}" opacity="{1 if i == 0 else .82}"/>
+<text class="val a" style="animation-delay:{delay + .7}s" x="{bar_x + w + 14:.1f}" y="{y + 29}">{r['chrf']:.1f} · {r['bleu']:.1f}</text>""")
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
+<style>{css}
+.num{{font-family:SI,serif;font-size:64px;fill:{t['accent']}}}
+.title{{font-family:S,serif;font-size:58px;fill:{t['ink']}}}
+.stack,.cap{{font-family:M,monospace;font-size:13px;letter-spacing:.14em;fill:{t['muted']}}}
+.lab{{font-family:S,serif;font-size:28px;fill:{t['ink']}}}
+.val{{font-family:M,monospace;font-size:16px;fill:{t['muted']}}}
+.hand{{font-family:H,cursive;font-size:30px;fill:{t['accent']}}}
+@keyframes rise{{from{{opacity:0;transform:translateY(18px)}}to{{opacity:1;transform:none}}}}
+@keyframes grow{{from{{transform:scaleX(0)}}to{{transform:scaleX(1)}}}}
+@keyframes fade{{from{{opacity:0}}to{{opacity:1}}}}
+.a1{{animation:rise .8s cubic-bezier(.2,.7,.2,1) .1s both}} .a2{{animation:rise .8s cubic-bezier(.2,.7,.2,1) .3s both}}
+.a{{animation:fade .6s both}} .bar{{transform-box:fill-box;transform-origin:left;animation:grow 1s cubic-bezier(.6,0,.2,1) both}}
+.n{{animation:fade .6s 1.9s both}}
+</style>
+<defs>{grain(t)}</defs>
+<rect width="{W}" height="{H}" fill="{t['bg']}"/>
+<rect width="{W}" height="{H}" filter="url(#grain)"/>
+<g class="a1"><text class="num" x="{x0}" y="92">{num}</text></g>
+<g class="a2"><text class="title" x="{x0 + 82}" y="90">{title}</text>
+<text class="stack" x="{W - x0}" y="84" text-anchor="end">{stack}</text></g>
+{''.join(bars)}
+<text class="cap a" style="animation-delay:1.4s" x="{bar_x}" y="{top + len(rows) * gap + 10}">{caption}</text>
+<g class="n"><text class="hand" x="{W - 330}" y="{top - 52}">{note[0]}</text><text class="hand" x="{W - 300}" y="{top - 20}">{note[1]}</text></g>
+</svg>
+"""
+
+
+# ───────────────────────────── small pieces ─────────────────────────────
+def squiggle(t):
+    W = 1200
+    pts = " ".join(f"{x} {14 + (6 if (x // 30) % 2 else -6)}" for x in range(0, 1201, 30))
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="28" viewBox="0 0 {W} 28">
+<style>@keyframes draw{{to{{stroke-dashoffset:0}}}}.s{{stroke-dasharray:1700;stroke-dashoffset:1700;animation:draw 1.6s cubic-bezier(.6,0,.2,1) .2s forwards}}</style>
+<polyline class="s" points="{pts}" fill="none" stroke="{t['muted']}" stroke-opacity=".5" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
+"""
+
+
+def signature(t):
+    text = "— Saad"
+    css = faces({"hand": text})
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="360" height="110" viewBox="0 0 360 110">
+<style>{css}
+.sig{{font-family:H,cursive;font-size:72px;fill:{t['ink']};fill-opacity:0;stroke:{t['ink']};stroke-width:1.2;
+stroke-dasharray:900;stroke-dashoffset:900;animation:write 2.2s ease-in-out .3s forwards, fill .8s 2.1s forwards}}
+@keyframes write{{to{{stroke-dashoffset:0}}}} @keyframes fill{{to{{fill-opacity:1;stroke-width:0}}}}
+</style>
+<text class="sig" x="10" y="78">{text}</text>
+</svg>
+"""
+
+
+PLATES = [
+    dict(key="thinkdesk", num="01", title="ThinkDesk", stack="PYTHON · FASTAPI · POSTGRES · NEXT.JS",
+         shot=dict(path=SRC / "screens" / "thinkdesk-chat.png", crop=(280, 60, 1160, 420)),
+         note=["one question, two documents,", "every claim cited"], note_xy=(70, 560), arrow=(300, 548, 438, 470)),
+    dict(key="omnira", num="02", title="Omnira", stack="TAURI · REACT · FASTIFY · PRISMA",
+         shot=dict(path=SRC / "screens" / "omnira-chat.png", crop=(0, 60, 800, 640)),
+         note=["it set the timer itself —", "a real tool call, not", "just a reply"], note_xy=(80, 300), arrow=(390, 318, 832, 236)),
+    dict(key="aes", num="03", title="AES App", stack="FLUTTER · FIREBASE · GMAIL API", phone=True,
+         shot=dict(path=SRC / "screens" / "aes-dashboard.jpg", crop=(0, 75, 1057, 1420)),
+         note=["work orders, payroll,", "accounting, GPS attendance —", "one codebase, 12 roles"],
+         note_xy=(90, 250), arrow=(420, 330, 680, 300)),
+]
+
 if __name__ == "__main__":
-    (OUT / "header.svg").write_text(header(), encoding="utf-8")
-    (OUT / "divider.svg").write_text(divider(), encoding="utf-8")
-    for fname, args in CARDS.items():
-        (OUT / f"{fname}.svg").write_text(card(*args), encoding="utf-8")
-    print("generated", sorted(p.name for p in OUT.glob("*.svg")))
+    written = []
+    for theme, t in THEMES.items():
+        (OUT / f"hero-{theme}.svg").write_text(hero(t), encoding="utf-8")
+        (OUT / f"squiggle-{theme}.svg").write_text(squiggle(t), encoding="utf-8")
+        (OUT / f"signature-{theme}.svg").write_text(signature(t), encoding="utf-8")
+        for p in PLATES:
+            args = {k: v for k, v in p.items() if k != "key"}
+            (OUT / f"plate-{p['key']}-{theme}.svg").write_text(plate(t, **args), encoding="utf-8")
+        metrics = SRC / "arabic-mt-metrics.json"
+        if metrics.exists():
+            m = json.loads(metrics.read_text(encoding="utf-8"))
+            (OUT / f"plate-arabic-{theme}.svg").write_text(chart_plate(t, m), encoding="utf-8")
+    for f in sorted(OUT.glob("*.svg")):
+        print(f"{f.name:32s} {f.stat().st_size / 1024:7.1f} KB")

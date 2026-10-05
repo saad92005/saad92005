@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="28" viewBox="0 0 1200 28">
+<style>@keyframes draw{to{stroke-dashoffset:0}}.s{stroke-dasharray:1700;stroke-dashoffset:1700;animation:draw 1.6s cubic-bezier(.6,0,.2,1) .2s forwards}</style>
+<polyline class="s" points="0 8 30 20 60 8 90 20 120 8 150 20 180 8 210 20 240 8 270 20 300 8 330 20 360 8 390 20 420 8 450 20 480 8 510 20 540 8 570 20 600 8 630 20 660 8 690 20 720 8 750 20 780 8 810 20 840 8 870 20 900 8 930 20 960 8 990 20 1020 8 1050 20 1080 8 1110 20 1140 8 1170 20 1200 8" fill="none" stroke="#8b867d" stroke-opacity=".5" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
