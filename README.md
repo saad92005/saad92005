@@ -1,10 +1,24 @@
-### Hi, I'm Saad
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/header-a-light.svg">
+  <img src="assets/header-a-dark.svg" width="100%" alt="Muhammad Saad: AI Engineer and Full-Stack Developer">
+</picture>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/saadshahidpk"><img src="https://img.shields.io/badge/LinkedIn-0b0f17?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSIjMzhiZGY4IiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU%2BTGlua2VkSW48L3RpdGxlPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg%3D%3D&logoColor=38bdf8" alt="LinkedIn"></a>&nbsp;
+  <a href="https://saadshahid-portfolio.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0b0f17?style=for-the-badge&logo=vercel&logoColor=38bdf8" alt="Portfolio"></a>&nbsp;
+  <a href="mailto:saad39587@gmail.com"><img src="https://img.shields.io/badge/Email-0b0f17?style=for-the-badge&logo=gmail&logoColor=38bdf8" alt="Email"></a>
+</p>
 
 I'm an AI engineer and full-stack developer in Lahore, finishing a CS degree at UMT.
 
 I build AI software that has to work for someone other than me: agents that ask permission before they act, retrieval that cites its sources, and the unglamorous parts around them, like auth, migrations, tests and CI. One of my projects was built for a real engineering services company and handles their work orders, attendance and payroll.
 
-[Portfolio](https://saadshahid-portfolio.vercel.app) · [LinkedIn](https://www.linkedin.com/in/saadshahidpk) · [saad39587@gmail.com](mailto:saad39587@gmail.com)
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=py,ts,dart,react,nextjs,flutter,fastapi,nodejs,postgres,prisma,firebase,pytorch,docker,githubactions,tauri,vercel&theme=light&perline=16">
+    <img src="https://skillicons.dev/icons?i=py,ts,dart,react,nextjs,flutter,fastapi,nodejs,postgres,prisma,firebase,pytorch,docker,githubactions,tauri,vercel&theme=dark&perline=16" alt="Python, TypeScript, Dart, React, Next.js, Flutter, FastAPI, Node.js, PostgreSQL, Prisma, Firebase, PyTorch, Docker, GitHub Actions, Tauri, Vercel">
+  </picture>
+</p>
 
 <table><tr><td valign="top" width="36%">
 
@@ -50,4 +64,14 @@ Looking for an AI engineering internship or junior role
 
 </td></tr></table>
 
-<sub>The first two columns rebuild themselves from my real GitHub history. [How this works](build_readme.py).</sub>
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/stats-light.svg">
+  <img src="assets/stats-dark.svg" width="100%" alt="Contributions, public repositories and language breakdown">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/activity-light.svg">
+  <img src="assets/activity-dark.svg" width="100%" alt="Contribution activity over the last year">
+</picture>
+
+<sub>The table, numbers and activity rebuild themselves from my real GitHub data. [How this works](build_readme.py).</sub>

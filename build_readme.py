@@ -12,10 +12,12 @@ import json
 import os
 import pathlib
 import re
+import sys
 import urllib.request
 from datetime import datetime
 
 ROOT = pathlib.Path(__file__).parent
+sys.path.insert(0, str(ROOT / "assets"))
 USER = "saad92005"
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
@@ -92,6 +94,42 @@ def featured_repos():
     return [data[f"r{i}"] for i in range(len(FEATURED)) if data.get(f"r{i}")]
 
 
+def profile_data():
+    """Contribution calendar + language bytes across public, non-fork repos."""
+    u = graphql(
+        """query($login: String!) {
+          user(login: $login) {
+            contributionsCollection { contributionCalendar {
+              weeks { contributionDays { date contributionCount } }
+            } }
+            repositories(first: 100, privacy: PUBLIC, ownerAffiliations: OWNER, isFork: false) {
+              nodes { name languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+                edges { size node { name } } } }
+            }
+          }
+        }""",
+        {"login": USER},
+    )["user"]
+    # Completed weeks only, so the card changes weekly rather than every day.
+    weeks = [[(d["date"], d["contributionCount"]) for d in w["contributionDays"]]
+             for w in u["contributionsCollection"]["contributionCalendar"]["weeks"]]
+    weeks = [w for w in weeks if len(w) == 7][-52:]
+    total = sum(c for w in weeks for _, c in w)
+    sizes = {}
+    repos = [r for r in u["repositories"]["nodes"] if r["name"] not in SKIP_REPOS]
+    for r in repos:
+        for e in r["languages"]["edges"]:
+            sizes[e["node"]["name"]] = sizes.get(e["node"]["name"], 0) + e["size"]
+    ranked = sorted(sizes.items(), key=lambda kv: -kv[1])
+    allb = sum(sizes.values()) or 1
+    langs = [(n, b / allb) for n, b in ranked[:5]]
+    rest = 1 - sum(sh for _, sh in langs)
+    if rest > 0.001:
+        langs.append(("Other", rest))
+    numbers = [(f"{total:,}", "contributions"), (str(len(repos)), "public repos"), (str(len(sizes)), "languages")]
+    return numbers, langs, weeks, total
+
+
 def esc(s):
     return s.replace("|", "\\|").replace("<", "&lt;").replace(">", "&gt;")
 
@@ -136,4 +174,7 @@ if __name__ == "__main__":
     text = replace_section(text, "shipped", render_shipped(recent_commits()))
     text = replace_section(text, "projects", render_projects(featured_repos()))
     readme.write_text(text, encoding="utf-8")
+    import cards  # assets/cards.py
+
+    cards.write_all(*profile_data())
     print("README.md rebuilt")
