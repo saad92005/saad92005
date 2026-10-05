@@ -331,7 +331,6 @@ PLATES = [
 if __name__ == "__main__":
     written = []
     for theme, t in THEMES.items():
-        (OUT / f"hero-{theme}.svg").write_text(hero(t), encoding="utf-8")
         (OUT / f"squiggle-{theme}.svg").write_text(squiggle(t), encoding="utf-8")
         (OUT / f"signature-{theme}.svg").write_text(signature(t), encoding="utf-8")
         for p in PLATES:

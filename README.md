@@ -1,13 +1,16 @@
-<a href="https://saadshahid-portfolio.vercel.app">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg">
-    <img src="assets/hero-dark.svg" width="100%" alt="Muhammad Saad. I build AI software that ships, and agents that ask before they act.">
-  </picture>
-</a>
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/banner-light.svg">
+  <img src="assets/banner-dark.svg" width="100%" alt="Muhammad Saad: AI Engineer and Full-Stack Developer in Lahore. A dithered portrait that morphs into the Python, TypeScript and Flutter logos, next to a system-info readout.">
+</picture>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/saadshahidpk"><img src="https://img.shields.io/badge/LinkedIn-0f0f11?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSIjZmY3YTQ1IiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU%2BTGlua2VkSW48L3RpdGxlPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg%3D%3D" alt="LinkedIn"></a>&nbsp;&nbsp;
+  <a href="https://saadshahid-portfolio.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0f0f11?style=for-the-badge&logo=vercel&logoColor=ff7a45" alt="Portfolio"></a>&nbsp;&nbsp;
+  <a href="mailto:saad39587@gmail.com"><img src="https://img.shields.io/badge/Email-0f0f11?style=for-the-badge&logo=gmail&logoColor=ff7a45" alt="Email"></a>
+</p>
 
 I'm a CS student at UMT in Lahore. Most of what I build is an AI feature wrapped in a lot of ordinary, careful engineering: auth, migrations, tests, CI and the parts that make it work for someone who isn't me. I like problems where the model is the easy bit and the hard part is making it trustworthy.
 
-[portfolio ↗](https://saadshahid-portfolio.vercel.app) &nbsp;·&nbsp; [linkedin ↗](https://www.linkedin.com/in/saadshahidpk) &nbsp;·&nbsp; [saad39587@gmail.com](mailto:saad39587@gmail.com)
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/squiggle-light.svg">
@@ -65,6 +68,18 @@ Dialect Arabic → English translation on 688 held-out sentences across six dial
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/squiggle-light.svg">
   <img src="assets/squiggle-dark.svg" width="100%" alt="">
+</picture>
+
+## Activity
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com/?user=saad92005&amp;hide_border=true&amp;background=f7f4ee&amp;stroke=e0dbd1&amp;ring=d9541e&amp;fire=d9541e&amp;currStreakLabel=d9541e&amp;sideLabels=76716a&amp;currStreakNum=1c1b18&amp;sideNums=1c1b18&amp;dates=76716a&amp;card_width=1180">
+  <img src="https://streak-stats.demolab.com/?user=saad92005&amp;hide_border=true&amp;background=0f0f11&amp;stroke=2a292e&amp;ring=ff7a45&amp;fire=ff7a45&amp;currStreakLabel=ff7a45&amp;sideLabels=8b867d&amp;currStreakNum=ece7df&amp;sideNums=ece7df&amp;dates=8b867d&amp;card_width=1180" width="100%" alt="Contribution streak">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/saad92005/saad92005/output/github-snake.svg">
+  <img src="https://raw.githubusercontent.com/saad92005/saad92005/output/github-snake-dark.svg" width="100%" alt="A snake eating my contribution graph">
 </picture>
 
 ## What I reach for
