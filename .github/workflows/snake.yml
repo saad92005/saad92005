@@ -1,0 +1,35 @@
+name: Generate snake animation
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths: [".github/workflows/snake.yml"]
+
+jobs:
+  generate:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Generate snake SVGs
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          # First colour in color_dots is the empty cell. Dark mode uses a visible warm
+          # slate: a near-black empty cell disappears against GitHub's #0d1117.
+          outputs: |
+            dist/github-snake.svg?palette=github-light&color_snake=#1c1b18&color_dots=#ebe6dd,#f6c9b1,#f0a07a,#e2703e,#d9541e
+            dist/github-snake-dark.svg?palette=github-dark&color_snake=#ece7df&color_dots=#2e2c2a,#5c3b2c,#a24a24,#e0632f,#ff7a45
+
+      - name: Push to output branch
+        uses: crazy-max/ghaction-github-pages@v3.1.0
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: "Update snake animation [skip ci]"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
