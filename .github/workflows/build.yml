@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [master]
-    paths: [build_readme.py, assets/cards.py, assets/header.py, .github/workflows/build.yml]
+    paths: [build_readme.py, assets/cards.py, assets/header.py, assets/scene3d.py, .github/workflows/build.yml]
 
 permissions:
   contents: write

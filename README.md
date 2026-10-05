@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/header-a-light.svg">
-  <img src="assets/header-a-dark.svg" width="100%" alt="Muhammad Saad: AI Engineer and Full-Stack Developer">
+  <source media="(prefers-color-scheme: light)" srcset="assets/header-3d-light.svg">
+  <img src="assets/header-3d-dark.svg" width="100%" alt="Muhammad Saad: AI Engineer and Full-Stack Developer">
 </picture>
 
 <p align="center">
@@ -63,6 +63,11 @@ Keeping LLM API keys out of client apps
 Looking for an AI engineering internship or junior role
 
 </td></tr></table>
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/stack-light.svg">
+  <img src="assets/stack-dark.svg" width="100%" alt="How my projects are built: ThinkDesk (Next.js, FastAPI, hybrid RAG with Groq, PostgreSQL), Omnira (Tauri and React, Fastify, agent tool calls, Postgres with Prisma), AES App (Flutter, Firebase Auth, Cloud Firestore, n8n to Groq), Arabic MT (Tatoeba dialect data, MarianMT, fine-tuning, BLEU and chrF evaluation)">
+</picture>
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/stats-light.svg">
