@@ -28,36 +28,6 @@ def frame(t, h, css, defs, body, text):
 """
 
 
-def stats_card(t, numbers, langs):
-    """numbers: [(value, label)], langs: [(name, share 0..1)]"""
-    h = 230
-    x0 = 72
-    cells, text = [], "BY THE NUMBERS LANGUAGES Other%0123456789.,"
-    for i, (val, label) in enumerate(numbers):
-        x = x0 + i * 190
-        cells.append(f'<g style="animation:up .7s cubic-bezier(.2,.7,.2,1) {0.1 + i * 0.12:.2f}s both">'
-                     f'<text class="big" x="{x}" y="128">{val}</text><text class="lbl" x="{x}" y="156">{label}</text></g>')
-        text += str(val) + label
-    # language bar
-    bx, bw, by = 700, 428, 96
-    shades = [t["a1"], t["a2"], "#60a5fa", "#c084fc", "#94a3b8", "#475569"] if t["bg"] != "#ffffff" else \
-             [t["a1"], t["a2"], "#2563eb", "#9333ea", "#64748b", "#cbd5e1"]
-    segs, legend, x = [], [], bx
-    for i, (name, share) in enumerate(langs):
-        w = bw * share
-        segs.append(f'<rect x="{x:.1f}" y="{by}" width="{max(w - 2, 1):.1f}" height="12" rx="3" fill="{shades[i % len(shades)]}" '
-                    f'style="transform-box:fill-box;transform-origin:left;animation:grow .9s cubic-bezier(.6,0,.2,1) {0.4 + i * 0.12:.2f}s both"/>')
-        lx, ly = bx + (i % 2) * 214, 138 + (i // 2) * 26
-        legend.append(f'<g style="animation:up .6s {0.7 + i * 0.08:.2f}s both"><circle cx="{lx + 5}" cy="{ly - 5}" r="5" fill="{shades[i % len(shades)]}"/>'
-                      f'<text class="lbl" x="{lx + 18}" y="{ly}">{name} <tspan fill="{t["ink"]}">{share * 100:.1f}%</tspan></text></g>')
-        text += name
-        x += w
-    css = "@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}"
-    body = (f'<text class="ttl" x="{x0}" y="62">BY THE NUMBERS</text><text class="ttl" x="{bx}" y="62">LANGUAGES</text>'
-            + "".join(cells) + "".join(segs) + "".join(legend))
-    return frame(t, h, css, "", body, text)
-
-
 def activity_card(t, weeks, total, longest, current):
     """weeks: list of 7-length lists of (date, count)."""
     cell, gap = 15, 4
@@ -110,8 +80,5 @@ def streaks(days):
 def write_all(numbers, langs, weeks, total):
     days = [d for w in weeks for d in w]
     longest, current = streaks(days)
-    import people
-    as_of = date.fromisoformat(days[-1][0]).strftime("%b %d, %Y")
-    people.write_all(THEMES, numbers, langs, as_of)
     for theme, t in THEMES.items():
         (HERE / f"activity-{theme}.svg").write_text(activity_card(t, weeks, total, longest, current), encoding="utf-8")

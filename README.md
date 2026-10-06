@@ -6,7 +6,8 @@
 <p align="center">
   <a href="https://www.linkedin.com/in/saadshahidpk"><img src="https://img.shields.io/badge/LinkedIn-0b0f17?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSIjMzhiZGY4IiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU%2BTGlua2VkSW48L3RpdGxlPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg%3D%3D&logoColor=38bdf8" alt="LinkedIn"></a>&nbsp;
   <a href="https://saadshahid-portfolio.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0b0f17?style=for-the-badge&logo=vercel&logoColor=38bdf8" alt="Portfolio"></a>&nbsp;
-  <a href="mailto:saad39587@gmail.com"><img src="https://img.shields.io/badge/Email-0b0f17?style=for-the-badge&logo=gmail&logoColor=38bdf8" alt="Email"></a>
+  <a href="mailto:saad39587@gmail.com"><img src="https://img.shields.io/badge/Email-0b0f17?style=for-the-badge&logo=gmail&logoColor=38bdf8" alt="Email"></a>&nbsp;
+  <a href="https://wa.me/923214429267"><img src="https://img.shields.io/badge/WhatsApp-0b0f17?style=for-the-badge&logo=whatsapp&logoColor=38bdf8" alt="WhatsApp"></a>
 </p>
 
 I'm an AI engineer and full-stack developer in Lahore, finishing a CS degree at UMT.
@@ -70,20 +71,8 @@ Looking for an AI engineering internship or junior role
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/id-card-light.svg">
-  <img src="assets/id-card-dark.svg" width="100%" alt="ID badge with my photo, beside live GitHub numbers: contributions, public repositories and language breakdown">
-</picture>
-
-<picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/activity-light.svg">
   <img src="assets/activity-dark.svg" width="100%" alt="Contribution activity over the last year">
 </picture>
-
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/connect-light.svg">
-  <img src="assets/connect-dark.svg" width="100%" alt="Let's talk: LinkedIn and WhatsApp">
-</picture>
-
-<p align="center"><a href="https://www.linkedin.com/in/saadshahidpk"><b>LinkedIn</b></a> &nbsp;·&nbsp; <a href="https://wa.me/923214429267"><b>WhatsApp</b></a> &nbsp;·&nbsp; <a href="https://saadshahid-portfolio.vercel.app"><b>Portfolio</b></a></p>
 
 <sub>The table, numbers and activity rebuild themselves from my real GitHub data. [How this works](build_readme.py).</sub>
