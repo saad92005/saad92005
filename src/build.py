@@ -93,12 +93,16 @@ def frame(ns, h, text, css, defs, body):
 <linearGradient id="{ns}g" x1="0" x2="1"><stop offset="0" stop-color="{BLUE}"/><stop offset="1" stop-color="{RED}"/></linearGradient>
 <linearGradient id="{ns}hair" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{BLUE}" stop-opacity=".9"/><stop offset=".5" stop-color="{LINE}"/><stop offset="1" stop-color="{RED}" stop-opacity=".9"/></linearGradient>
 <pattern id="{ns}dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="{DOT}"/></pattern>
+<radialGradient id="{ns}gl1"><stop offset="0" stop-color="{BLUE}" stop-opacity=".16"/><stop offset="1" stop-color="{BLUE}" stop-opacity="0"/></radialGradient>
+<radialGradient id="{ns}gl2"><stop offset="0" stop-color="{RED}" stop-opacity=".11"/><stop offset="1" stop-color="{RED}" stop-opacity="0"/></radialGradient>
+<linearGradient id="{ns}top" x1="0" x2="1"><stop offset="0" stop-color="{BLUE}" stop-opacity="0"/><stop offset=".3" stop-color="{BLUE}"/><stop offset=".7" stop-color="{RED}"/><stop offset="1" stop-color="{RED}" stop-opacity="0"/></linearGradient>
 <clipPath id="{ns}frame"><rect width="{W}" height="{h}" rx="22"/></clipPath>
 {defs}
 </defs>
 <g clip-path="url(#{ns}frame)">
 <rect width="{W}" height="{h}" fill="{BG}"/><rect width="{W}" height="{h}" fill="url(#{ns}dots)"/>
-<rect width="{W * .62:.0f}" height="4" fill="{BLUE}"/><rect x="{W * .62:.0f}" width="{W * .38:.0f}" height="4" fill="{RED}"/>
+<circle cx="0" cy="0" r="520" fill="url(#{ns}gl1)"/><circle cx="{W}" cy="{h}" r="520" fill="url(#{ns}gl2)"/>
+<rect x="80" width="{W - 160}" height="1" fill="url(#{ns}top)"/>
 {body}
 </g>
 <rect x=".75" y=".75" width="{W - 1.5}" height="{h - 1.5}" rx="22" fill="none" stroke="url(#{ns}hair)" stroke-width="1.5"/>
@@ -147,6 +151,7 @@ def hero():
                      f'<g transform="translate({x + 22} 432)">{glyph[g]}</g><text class="r" x="{x + 38}" y="438" font-size="16" fill="{MUTED}">{esc(label)}</text></g>')
         x += w + 12
     px, py, pw, ph = 846, 54, 296, 344
+    term, term_text = terminal(ns, 752, 50, 392, 344)
     css = f"""
 .{ns}rise1{{animation:{ns}rise 1s cubic-bezier(.2,.8,.2,1) .7s both}} .{ns}rise2{{animation:{ns}rise 1s cubic-bezier(.2,.8,.2,1) .85s both}}
 @keyframes {ns}rise{{from{{transform:translateY(130px)}}to{{transform:none}}}}
@@ -172,20 +177,47 @@ def hero():
 <g clip-path="url(#{ns}role)" {stagger(ns, 1.2, "fade")}>{''.join(roles)}</g>
 <g {stagger(ns, 1.3)}><text class="r" x="64" y="394" font-size="19" fill="{MUTED}">{PITCH}</text></g>
 {''.join(chips)}
-<circle class="{ns}glow" cx="{px + pw / 2}" cy="{py + ph / 2}" r="230" fill="url(#{ns}rg)" opacity=".45"/>
-<g {stagger(ns, .5)}><g class="{ns}float">
-  <rect x="{px}" y="{py}" width="{pw}" height="{ph}" rx="24" fill="{CARD}"/>
-  <g clip-path="url(#{ns}photo)">
-    <rect x="{px}" y="{py}" width="{pw}" height="{ph}" fill="url(#{ns}dots)"/>
-    <image x="{px}" y="{py + 14}" width="{pw}" height="{ph - 14}" xlink:href="{png('portrait-hero.png')}"/>
-    <rect x="{px}" y="{py}" width="{pw}" height="{ph}" fill="url(#{ns}shade)"/>
-  </g>
-  <rect x="{px + .75}" y="{py + .75}" width="{pw - 1.5}" height="{ph - 1.5}" rx="24" fill="none" stroke="url(#{ns}hair)" stroke-width="1.5"/>
-  <rect x="{px - 14}" y="{py + ph - 22}" width="196" height="40" rx="8" fill="{RED}"/>
-  <text class="m" x="{px + 4}" y="{py + ph + 4}" font-size="15" fill="#ffffff" letter-spacing="1">AI ENGINEER</text>
-</g></g>"""
-    text = greet + "MUHAMMADSAAD.>" + "".join(ROLES) + PITCH + "".join(l for _, l in row) + "AI ENGINEER"
+{term}"""
+    text = greet + "MUHAMMADSAAD.>" + "".join(ROLES) + PITCH + "".join(l for _, l in row) + term_text
     return frame(ns, h, text, css, defs, body)
+
+
+CMDS = [("whoami", "Muhammad Saad · AI engineer, Lahore"),
+        ("ls ~/projects", "thinkdesk  omnira  aes-app  arabic-mt"),
+        ("cat focus.txt", "agents · retrieval · applied NLP")]
+
+
+def terminal(ns, x, y, w, h):
+    """A terminal window that types three commands. SMIL only; base state is the finished session."""
+    cw, t, per = 14 * 0.6, 1.6, 0.06
+    out, text = [], "saad@lahore: ~$" + "".join(c + o for c, o in CMDS)
+    for i, (cmd, res) in enumerate(CMDS):
+        ly = y + 84 + i * 76
+        n = len(cmd)
+        dur = t + n * per + 0.35
+        widths = ";".join(f"{k * cw:.1f}" for k in [0] + list(range(n + 1)) + [n])
+        kts = ";".join(f"{v / dur:.4f}" for v in [0, t] + [t + k * per for k in range(1, n + 1)] + [dur])
+        out.append(f'<clipPath id="{ns}c{i}"><rect x="{x + 46}" y="{ly - 16}" width="{n * cw:.1f}" height="22">'
+                   f'<animate attributeName="width" values="{widths}" keyTimes="{kts}" calcMode="discrete" dur="{dur:.2f}s" begin="0s" fill="freeze"/></rect></clipPath>'
+                   f'<text class="m" x="{x + 24}" y="{ly}" font-size="14" fill="{RED}">$</text>'
+                   f'<g clip-path="url(#{ns}c{i})"><text class="m" x="{x + 46}" y="{ly}" font-size="14" fill="{INK}">{esc(cmd)}</text></g>'
+                   f'<text class="m" x="{x + 46}" y="{ly + 26}" font-size="14" fill="{MUTED}">{esc(res)}'
+                   f'<animate attributeName="opacity" values="0;0;1" keyTimes="0;{(dur - .05) / dur:.4f};1" dur="{dur:.2f}s" begin="0s" fill="freeze"/></text>')
+        t = dur + 0.35
+    fy = y + 84 + len(CMDS) * 76
+    out.append(f'<text class="m" x="{x + 24}" y="{fy}" font-size="14" fill="{RED}">$</text>'
+               f'<rect class="{ns}caret" x="{x + 46}" y="{fy - 14}" width="9" height="18" fill="{BLUE}"/>')
+    bar = "#111a30"
+    win = (f'<g {stagger(ns, .5)}><g class="{ns}float">'
+           f'<rect x="{x - 30}" y="{y + 20}" width="{w + 60}" height="{h}" rx="40" fill="url(#{ns}rg)" opacity=".35"/>'
+           f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="18" fill="{CARD}"/>'
+           f'<rect x="{x}" y="{y}" width="{w}" height="40" rx="18" fill="{bar}"/><rect x="{x}" y="{y + 22}" width="{w}" height="18" fill="{bar}"/>'
+           f'<line x1="{x}" y1="{y + 40}" x2="{x + w}" y2="{y + 40}" stroke="{LINE}"/>'
+           + "".join(f'<circle cx="{x + 24 + k * 18}" cy="{y + 20}" r="5.5" fill="{c}"/>' for k, c in enumerate((RED, "#f5b83d", "#2bd576")))
+           + f'<text class="m" x="{x + w / 2}" y="{y + 25}" font-size="12" fill="{MUTED}" text-anchor="middle">saad@lahore: ~</text>'
+           + "".join(out)
+           + f'<rect x="{x + .75}" y="{y + .75}" width="{w - 1.5}" height="{h - 1.5}" rx="18" fill="none" stroke="url(#{ns}hair)" stroke-width="1.5"/></g></g>')
+    return win, text
 
 
 # ── 2. about + interests carousel ───────────────────────────────────
@@ -409,7 +441,50 @@ def id_dashboard():
     return frame(ns, h, text, css, defs, body)
 
 
-# ── 5. connect ───────────────────────────────────────────────────────
+# ── 5. selected work ────────────────────────────────────────────────
+PROJECTS = [("ThinkDesk", "LIVE", ["AI knowledge workspace: hybrid RAG search that", "cites its sources, plus a research mode."], ["Next.js", "FastAPI", "PostgreSQL", "Groq"]),
+            ("Omnira", "DESKTOP", ["Desktop AI agent with voice and chat that asks", "your permission before every tool call."], ["Tauri", "React", "Fastify", "Prisma"]),
+            ("AES App", "CLIENT", ["Operations platform for an engineering services", "company: work orders, GPS attendance, payroll."], ["Flutter", "Firebase", "n8n"]),
+            ("Arabic MT", "RESEARCH", ["Dialect Arabic → English. Fine-tuned MarianMT:", "BLEU 29.0 vs 13.0 zero-shot on held-out data."], ["PyTorch", "MarianMT", "Tatoeba"])]
+
+
+def projects():
+    ns, h = "pj", 580
+    cards = []
+    for i, (name, tag, desc, stack_) in enumerate(PROJECTS):
+        x, y = 64 + (i % 2) * 548, 150 + (i // 2) * 206
+        w, hh, acc = 524, 186, BLUE if i in (0, 3) else RED
+        chips, cx_ = [], x + 28
+        for s_ in stack_:
+            cwid = 22 + len(s_) * 7.4
+            chips.append(f'<rect x="{cx_:.0f}" y="{y + 140}" width="{cwid:.0f}" height="26" rx="13" fill="{BG}" stroke="{LINE}"/>'
+                         f'<text class="m" x="{cx_ + cwid / 2:.0f}" y="{y + 157}" font-size="12" fill="{INK}" text-anchor="middle">{s_}</text>')
+            cx_ += cwid + 8
+        tw = 30 + len(tag) * 8.4 + (14 if tag == "LIVE" else 0)
+        tx = x + w - 28 - tw
+        dot = f'<circle class="{ns}live" cx="{tx + 16:.0f}" cy="{y + 33}" r="4" fill="#2bd576"/>' if tag == "LIVE" else ""
+        cards.append(
+            f'<g {stagger(ns, .4 + i * .14)}>'
+            f'<rect x="{x}" y="{y}" width="{w}" height="{hh}" rx="20" fill="{CARD}" stroke="{LINE}"/>'
+            f'<rect x="{x + 28}" y="{y}" width="120" height="2" fill="{acc}"/>'
+            f'<rect class="{ns}beam" x="{x + 28}" y="{y}" width="40" height="2" fill="#fff" opacity="0" style="animation-delay:{i * .9:.1f}s"/>'
+            f'<text class="m" x="{x + 28}" y="{y + 38}" font-size="13" fill="{acc}" letter-spacing="2">0{i + 1}</text>'
+            f'<rect x="{tx:.0f}" y="{y + 20}" width="{tw:.0f}" height="26" rx="13" fill="none" stroke="{LINE}"/>{dot}'
+            f'<text class="m" x="{tx + tw / 2 + (7 if dot else 0):.0f}" y="{y + 38}" font-size="11" fill="{MUTED}" text-anchor="middle" letter-spacing="1.5">{tag}</text>'
+            f'<text class="d" x="{x + 64}" y="{y + 41}" font-size="30" fill="{INK}">{name.upper()}</text>'
+            + "".join(f'<text class="r" x="{x + 28}" y="{y + 84 + k * 24}" font-size="16" fill="{MUTED}">{esc(l)}</text>' for k, l in enumerate(desc))
+            + "".join(chips) + '</g>')
+    css = (f".{ns}beam{{animation:{ns}beam 4.5s ease-in-out infinite}}@keyframes {ns}beam{{0%{{transform:translateX(0);opacity:0}}20%{{opacity:.8}}60%,100%{{transform:translateX(80px);opacity:0}}}}"
+           f".{ns}live{{animation:{ns}pulse 1.6s ease-in-out infinite}}@keyframes {ns}pulse{{50%{{opacity:.25}}}}")
+    body = (f'<g {stagger(ns, .1)}><text class="m" x="64" y="66" font-size="14" fill="{BLUE}" letter-spacing="2">SELECTED WORK</text>'
+            f'<text class="d" x="64" y="110" font-size="44" fill="{INK}">THINGS I&#39;VE SHIPPED<tspan fill="{RED}">.</tspan></text>'
+            f'<text class="r" x="{W - 64}" y="110" font-size="16" fill="{MUTED}" text-anchor="end">Source links are just below.</text></g>'
+            + "".join(cards))
+    text = "SELECTED WORKTHINGS I'VE SHIPPED.Source links are just below.01234" + "".join(n.upper() + t + "".join(d) + "".join(s_) for n, t, d, s_ in PROJECTS)
+    return frame(ns, h, text, css, "", body)
+
+
+# ── 6. connect ───────────────────────────────────────────────────────
 LINKS = [("linkedin", "LinkedIn", "in/saadshahidpk"),
          ("whatsapp", "WhatsApp", "Message me directly"),
          ("vercel", "Portfolio", "Projects and write-ups"),
@@ -417,39 +492,36 @@ LINKS = [("linkedin", "LinkedIn", "in/saadshahidpk"),
 
 
 def connect():
-    ns, h = "cn", 440
+    ns, h = "cn", 360
     cards = []
     for i, (slug, name, handle) in enumerate(LINKS):
-        x, y = 560 + (i % 2) * 300, 196 + (i // 2) * 112
+        x, y = 610 + (i % 2) * 272, 74 + (i // 2) * 116
         cards.append(
-            f'<g {stagger(ns, 1.0 + i * .12)}><rect x="{x}" y="{y}" width="284" height="96" rx="18" fill="{CARD}" stroke="{LINE}"/>'
-            f'<rect x="{x + 20}" y="{y + 24}" width="48" height="48" rx="14" fill="#{HEX[slug] if slug != "vercel" else "1b2540"}"/>'
-            f'<g transform="translate({x + 32} {y + 36})" fill="#ffffff"><path d="{icon(slug)}"/></g>'
-            f'<text class="t" x="{x + 84}" y="{y + 44}" font-size="20" fill="{INK}">{name}</text>'
-            f'<text class="r" x="{x + 84}" y="{y + 68}" font-size="{14 if len(handle) > 22 else 15}" fill="{MUTED}">{esc(handle)}</text>'
-            f'<g class="{ns}nudge" style="animation-delay:{i * .25:.2f}s"><path d="M{x + 252} {y + 40} l8 8 -8 8" stroke="{BLUE if i % 2 == 0 else RED}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g>')
-    arrows = "".join(f'<path class="{ns}chev" style="animation-delay:{k * .18:.2f}s" d="M{474 + k * 22} 286 l12 14 -12 14" stroke="url(#{ns}g)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' for k in range(3))
-    css = f"""
-.{ns}me{{animation:{ns}me 1.1s cubic-bezier(.2,.7,.2,1) .1s both}} @keyframes {ns}me{{from{{opacity:0;transform:translateX(-40px)}}to{{opacity:1;transform:none}}}}
-.{ns}nudge{{animation:{ns}nudge 1.6s ease-in-out infinite}} @keyframes {ns}nudge{{50%{{transform:translateX(5px)}}}}
-.{ns}chev{{animation:{ns}chev 1.8s ease-in-out infinite}} @keyframes {ns}chev{{0%,100%{{opacity:.2}}40%{{opacity:1}}}}
-.{ns}glow{{transform-origin:240px 300px;animation:{ns}breathe 7s ease-in-out infinite}} @keyframes {ns}breathe{{50%{{transform:scale(1.1);opacity:.6}}}}"""
-    defs = (f'<radialGradient id="{ns}rg"><stop offset="0" stop-color="{BLUE}" stop-opacity=".5"/><stop offset=".6" stop-color="{RED}" stop-opacity=".12"/><stop offset="1" stop-color="{RED}" stop-opacity="0"/></radialGradient>')
+            f'<g {stagger(ns, .8 + i * .12)}><rect x="{x}" y="{y}" width="258" height="100" rx="18" fill="{CARD}" stroke="{LINE}"/>'
+            f'<rect x="{x + 20}" y="{y + 26}" width="48" height="48" rx="14" fill="#{HEX[slug] if slug != "vercel" else "1b2540"}"/>'
+            f'<g transform="translate({x + 32} {y + 38})" fill="#ffffff"><path d="{icon(slug)}"/></g>'
+            f'<text class="t" x="{x + 84}" y="{y + 46}" font-size="19" fill="{INK}">{name}</text>'
+            f'<text class="r" x="{x + 84}" y="{y + 70}" font-size="14" fill="{MUTED}">{esc(handle)}</text>'
+            f'<g class="{ns}nudge" style="animation-delay:{i * .25:.2f}s"><path d="M{x + 228} {y + 42} l8 8 -8 8" stroke="{BLUE if i % 2 == 0 else RED}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g>')
+    css = f".{ns}nudge{{animation:{ns}nudge 1.6s ease-in-out infinite}} @keyframes {ns}nudge{{50%{{transform:translateX(5px)}}}}"
+    defs = (f'<linearGradient id="{ns}div" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{LINE}" stop-opacity="0"/>'
+            f'<stop offset=".5" stop-color="{LINE}"/><stop offset="1" stop-color="{LINE}" stop-opacity="0"/></linearGradient>')
     body = f"""
-<circle class="{ns}glow" cx="240" cy="300" r="240" fill="url(#{ns}rg)"/>
-<image class="{ns}me" x="40" y="{h - 384}" width="425" height="384" xlink:href="{png('portrait-connect.png')}"/>
-{arrows}
-<g {stagger(ns, .5)}><text class="m" x="560" y="74" font-size="14" fill="{BLUE}" letter-spacing="2">CONNECT</text>
-<text class="d" x="556" y="130" font-size="62" fill="{INK}">LET'S BUILD <tspan fill="{RED}">SOMETHING.</tspan></text>
-<text class="r" x="560" y="166" font-size="18" fill="{MUTED}">Hiring, collaborating, or just curious about the work? Say hello.</text></g>
+<g {stagger(ns, .2)}><text class="m" x="64" y="84" font-size="14" fill="{BLUE}" letter-spacing="2">CONNECT</text>
+<text class="d" x="60" y="170" font-size="92" fill="{INK}">LET&#39;S BUILD</text>
+<text class="d" x="60" y="252" font-size="92" fill="{RED}">SOMETHING.</text>
+<text class="r" x="64" y="296" font-size="18" fill="{MUTED}">Hiring, collaborating, or just curious about the work?</text></g>
+<rect x="566" y="40" width="1" height="{h - 80}" fill="url(#{ns}div)"/>
+<circle r="3" cx="566.5" cy="60" fill="{BLUE}"><animate attributeName="cy" values="60;{h - 60}" dur="4s" begin="0s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="4s" begin="0s" repeatCount="indefinite"/></circle>
 {''.join(cards)}"""
-    text = "CONNECTLET'S BUILD SOMETHING.Hiring, collaborating, or just curious about the work? Say hello." + "".join(a + b for _, a, b in LINKS)
+    text = "CONNECTLET'S BUILDSOMETHING.Hiring, collaborating, or just curious about the work?" + "".join(a + b for _, a, b in LINKS)
     return frame(ns, h, text, css, defs, body)
 
 
 if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)
-    for name, fn in (("hero", hero), ("about-life", about), ("stack", stack), ("id-dashboard", id_dashboard), ("connect", connect)):
+    for name, fn in (("hero", hero), ("about-life", about), ("stack", stack), ("projects", projects), ("id-dashboard", id_dashboard), ("connect", connect)):
         p = OUT / f"{name}.svg"
         p.write_text(fn(), encoding="utf-8")
         print(f"{p.name}: {p.stat().st_size / 1024:.0f} KB")
