@@ -70,9 +70,4 @@ Looking for an AI engineering internship or junior role
   <img src="assets/stack-dark.svg" width="100%" alt="How my projects are built: ThinkDesk (Next.js, FastAPI, hybrid RAG with Groq, PostgreSQL), Omnira (Tauri and React, Fastify, agent tool calls, Postgres with Prisma), AES App (Flutter, Firebase Auth, Cloud Firestore, n8n to Groq), Arabic MT (Tatoeba dialect data, MarianMT, fine-tuning, BLEU and chrF evaluation)">
 </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/activity-light.svg">
-  <img src="assets/activity-dark.svg" width="100%" alt="Contribution activity over the last year">
-</picture>
-
-<sub>The table, numbers and activity rebuild themselves from my real GitHub data. [How this works](build_readme.py).</sub>
+<sub>The table rebuilds themselves from my real GitHub data. [How this works](build_readme.py).</sub>
