@@ -3,7 +3,7 @@
     python src/build.py
 
 Every SVG is self-contained: the photo is an inline PNG, fonts are subset WOFF2
-(Barlow Condensed, Barlow, JetBrains Mono, all SIL OFL; licences in src/fonts/),
+(Space Grotesk, Plus Jakarta Sans, Geist Mono, all SIL OFL; licences in src/fonts/),
 brand marks are Simple Icons (CC0, https://simpleicons.org) except LinkedIn, whose
 mark Simple Icons no longer ships; that path is LinkedIn's official "in" logo.
 Motion is CSS + SMIL only. Every element's un-animated state is its final, readable
@@ -13,6 +13,7 @@ import base64
 import io
 import math
 import random
+import re
 from pathlib import Path
 
 from fontTools import subset
@@ -31,8 +32,9 @@ ROLES = ["AI Engineer", "Full-Stack Developer", "RAG & Agent Builder", "Flutter 
 PITCH = "I build AI software that has to work for someone other than me."
 
 # ── fonts ────────────────────────────────────────────────────────────
-FONTS = {"D": ("BarlowCondensed-ExtraBold.ttf", None), "T": ("Barlow-Medium.ttf", None),
-         "R": ("Barlow-Regular.ttf", None), "M": ("JetBrainsMono[wght].ttf", 500)}
+FONTS = {"D": ("SpaceGrotesk[wght].ttf", 700), "T": ("PlusJakartaSans[wght].ttf", 600),
+         "R": ("PlusJakartaSans[wght].ttf", 400), "M": ("GeistMono[wght].ttf", 500)}
+D_SCALE = 0.64  # Space Grotesk is far wider than a condensed face; headline sizes below are authored for that scale
 
 
 def font_css(text):
@@ -81,9 +83,10 @@ def png(name):
 # ── shared frame ─────────────────────────────────────────────────────
 def frame(ns, h, text, css, defs, body):
     """Navy card, dot texture, gradient hairline border. ns prefixes every id."""
+    body = re.sub(r'(class="d[^"]*"[^>]*?font-size=")(\d+)"', lambda m: f'{m.group(1)}{int(m.group(2)) * D_SCALE:.0f}"', body)
     return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}" height="{h}" viewBox="0 0 {W} {h}">
 <style>{font_css(text)}
-.d{{font-family:D,sans-serif}} .t{{font-family:T,sans-serif}} .r{{font-family:R,sans-serif}} .m{{font-family:M,monospace}}
+.d{{font-family:D,sans-serif;letter-spacing:-.03em}} .t{{font-family:T,sans-serif}} .r{{font-family:R,sans-serif}} .m{{font-family:M,monospace}}
 @keyframes {ns}up{{from{{opacity:0;transform:translateY(16px)}}to{{opacity:1;transform:none}}}}
 @keyframes {ns}fade{{from{{opacity:0}}to{{opacity:1}}}}
 {css}
@@ -171,8 +174,8 @@ def hero():
     body = f"""
 <g clip-path="url(#{ns}type)"><text class="m" x="64" y="78" font-size="16" fill="{BLUE}">{greet}</text></g>
 <rect class="{ns}caret" x="{64 + n * cw + 4:.1f}" y="62" width="9" height="20" fill="{RED}"/>
-<g clip-path="url(#{ns}l1)"><text class="d {ns}rise1" x="60" y="204" font-size="132" fill="{INK}" letter-spacing="1">MUHAMMAD</text></g>
-<g clip-path="url(#{ns}l2)"><text class="d {ns}rise2" x="60" y="314" font-size="132" fill="{BLUE}" letter-spacing="1">SAAD.</text></g>
+<g clip-path="url(#{ns}l1)"><text class="d {ns}rise1" x="60" y="196" font-size="166" fill="{INK}" letter-spacing="1">MUHAMMAD</text></g>
+<g clip-path="url(#{ns}l2)"><text class="d {ns}rise2" x="60" y="304" font-size="166" fill="{BLUE}" letter-spacing="1">SAAD.</text></g>
 <g {stagger(ns, 1.2)}><text class="m" x="64" y="355" font-size="20" fill="{RED}">&gt;</text></g>
 <g clip-path="url(#{ns}role)" {stagger(ns, 1.2, "fade")}>{''.join(roles)}</g>
 <g {stagger(ns, 1.3)}><text class="r" x="64" y="394" font-size="19" fill="{MUTED}">{PITCH}</text></g>
@@ -501,15 +504,15 @@ def connect():
             f'<rect x="{x + 20}" y="{y + 26}" width="48" height="48" rx="14" fill="#{HEX[slug] if slug != "vercel" else "1b2540"}"/>'
             f'<g transform="translate({x + 32} {y + 38})" fill="#ffffff"><path d="{icon(slug)}"/></g>'
             f'<text class="t" x="{x + 84}" y="{y + 46}" font-size="19" fill="{INK}">{name}</text>'
-            f'<text class="r" x="{x + 84}" y="{y + 70}" font-size="14" fill="{MUTED}">{esc(handle)}</text>'
+            f'<text class="r" x="{x + 84}" y="{y + 70}" font-size="13" fill="{MUTED}">{esc(handle)}</text>'
             f'<g class="{ns}nudge" style="animation-delay:{i * .25:.2f}s"><path d="M{x + 228} {y + 42} l8 8 -8 8" stroke="{BLUE if i % 2 == 0 else RED}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g>')
     css = f".{ns}nudge{{animation:{ns}nudge 1.6s ease-in-out infinite}} @keyframes {ns}nudge{{50%{{transform:translateX(5px)}}}}"
     defs = (f'<linearGradient id="{ns}div" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{LINE}" stop-opacity="0"/>'
             f'<stop offset=".5" stop-color="{LINE}"/><stop offset="1" stop-color="{LINE}" stop-opacity="0"/></linearGradient>')
     body = f"""
 <g {stagger(ns, .2)}><text class="m" x="64" y="84" font-size="14" fill="{BLUE}" letter-spacing="2">CONNECT</text>
-<text class="d" x="60" y="170" font-size="92" fill="{INK}">LET&#39;S BUILD</text>
-<text class="d" x="60" y="252" font-size="92" fill="{RED}">SOMETHING.</text>
+<text class="d" x="60" y="172" font-size="124" fill="{INK}">LET&#39;S BUILD</text>
+<text class="d" x="60" y="254" font-size="124" fill="{RED}">SOMETHING.</text>
 <text class="r" x="64" y="296" font-size="18" fill="{MUTED}">Hiring, collaborating, or just curious about the work?</text></g>
 <rect x="566" y="40" width="1" height="{h - 80}" fill="url(#{ns}div)"/>
 <circle r="3" cx="566.5" cy="60" fill="{BLUE}"><animate attributeName="cy" values="60;{h - 60}" dur="4s" begin="0s" repeatCount="indefinite"/>
