@@ -1,73 +1,25 @@
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/header-3d-light.svg">
-  <img src="assets/header-3d-dark.svg" width="100%" alt="Muhammad Saad: AI Engineer and Full-Stack Developer">
-</picture>
+![Intro: Muhammad Saad, AI Engineer and Full-Stack Developer in Lahore](./assets/hero.svg?v=1)
+
+![About: AI agents, retrieval, full-stack products and applied NLP](./assets/about-life.svg?v=1)
+
+![Stack: Python, TypeScript, Dart, PyTorch, React, Next.js, Flutter, FastAPI, Node.js, Tauri, PostgreSQL, Prisma, Firebase, Docker, GitHub Actions, Vercel](./assets/stack.svg?v=1)
+
+### Projects
+
+| Project | What it is | Built with |
+| --- | --- | --- |
+| **[ThinkDesk](https://github.com/saad92005/thinkdesk)** · [live](https://thinkdesk-three.vercel.app) | AI knowledge workspace: hybrid RAG search with cited sources, document intelligence and a research mode. | Next.js, FastAPI, PostgreSQL, Groq |
+| **[Omnira](https://github.com/saad92005/omnira)** | Desktop AI agent with voice and chat that asks permission before every tool call. | Tauri, React, Fastify, Prisma |
+| **[AES App](https://github.com/saad92005/aes-app)** | Operations platform for an engineering services company: work orders, GPS attendance and payroll. | Flutter, Firebase, n8n |
+| **[Arabic Dialect MT](https://github.com/saad92005/arabic-dialect-mt-nlp)** | Dialect Arabic to English translation; fine-tuned MarianMT reaches BLEU 29.0 vs 13.0 zero-shot on held-out Tatoeba data. | PyTorch, MarianMT |
+
+![ID: verified numbers as of 06 Oct 2026](./assets/id-dashboard.svg?v=1)
+
+![Connect: LinkedIn, WhatsApp, portfolio and email](./assets/connect.svg?v=1)
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/saadshahidpk"><img src="https://img.shields.io/badge/LinkedIn-0b0f17?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSIjMzhiZGY4IiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU%2BTGlua2VkSW48L3RpdGxlPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg%3D%3D&logoColor=38bdf8" alt="LinkedIn"></a>&nbsp;
-  <a href="https://saadshahid-portfolio.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0b0f17?style=for-the-badge&logo=vercel&logoColor=38bdf8" alt="Portfolio"></a>&nbsp;
-  <a href="mailto:saad39587@gmail.com"><img src="https://img.shields.io/badge/Email-0b0f17?style=for-the-badge&logo=gmail&logoColor=38bdf8" alt="Email"></a>&nbsp;
-  <a href="https://wa.me/923214429267"><img src="https://img.shields.io/badge/WhatsApp-0b0f17?style=for-the-badge&logo=whatsapp&logoColor=38bdf8" alt="WhatsApp"></a>
+  <a href="https://www.linkedin.com/in/saadshahidpk"><b>LinkedIn</b></a> &nbsp;·&nbsp;
+  <a href="https://wa.me/923214429267"><b>WhatsApp</b></a> &nbsp;·&nbsp;
+  <a href="https://saadshahid-portfolio.vercel.app"><b>Portfolio</b></a> &nbsp;·&nbsp;
+  <a href="mailto:saad39587@gmail.com"><b>Email</b></a>
 </p>
-
-I'm an AI engineer and full-stack developer in Lahore, finishing a CS degree at UMT.
-
-I build AI software that has to work for someone other than me: agents that ask permission before they act, retrieval that cites its sources, and the unglamorous parts around them, like auth, migrations, tests and CI. One of my projects was built for a real engineering services company and handles their work orders, attendance and payroll.
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=py%2Cts%2Cdart%2Creact%2Cnextjs%2Cflutter%2Cfastapi%2Cnodejs%2Cpostgres%2Cprisma%2Cfirebase%2Cpytorch%2Cdocker%2Cgithubactions%2Ctauri%2Cvercel&theme=light&perline=16">
-    <img src="https://skillicons.dev/icons?i=py,ts,dart,react,nextjs,flutter,fastapi,nodejs,postgres,prisma,firebase,pytorch,docker,githubactions,tauri,vercel&theme=dark&perline=16" alt="Python, TypeScript, Dart, React, Next.js, Flutter, FastAPI, Node.js, PostgreSQL, Prisma, Firebase, PyTorch, Docker, GitHub Actions, Tauri, Vercel">
-  </picture>
-</p>
-
-<table><tr><td valign="top" width="36%">
-
-#### Recently shipped
-<!-- shipped starts -->
-**[arabic-dialect-mt-nlp](https://github.com/saad92005/arabic-dialect-mt-nlp)** · [Real held-out evaluation on Tatoeba dialect data](https://github.com/saad92005/arabic-dialect-mt-nlp/commit/aac79dc0cd6a7a678442a957b114d37ae0bc5689) · Oct 5, 2026
-
-**[saad-portfolio](https://github.com/saad92005/saad-portfolio)** · [Pin canonical site URL to saadshahid-portfolio.vercel.app](https://github.com/saad92005/saad-portfolio/commit/84253c3362c521cce78691b94867c57494724006) · Oct 5, 2026
-
-**[aes-app](https://github.com/saad92005/aes-app)** · [AI assistant: move to Groq models that still exist](https://github.com/saad92005/aes-app/commit/8e9cf6e5a65857071391a88dc619c9ee44f7655e) · Oct 5, 2026
-
-**[omnira](https://github.com/saad92005/omnira)** · [Fix chat on current Groq models, support plain Postgres, add…](https://github.com/saad92005/omnira/commit/b63d46f190193351311f76fcbe443bc68dd8070b) · Oct 5, 2026
-
-**[aes-app](https://github.com/saad92005/aes-app)** · [Route AI assistant through an n8n proxy; add payroll engine…](https://github.com/saad92005/aes-app/commit/5c3971b6bf1eeae099edb581463a8e0ce37f2ab8) · Oct 5, 2026
-
-**[omnira](https://github.com/saad92005/omnira)** · [Move product specification to docs/SPECIFICATION.md](https://github.com/saad92005/omnira/commit/cfa0cc4c4b4e0074802435ede103c8982b52d161) · Oct 5, 2026
-
-**[saad-portfolio](https://github.com/saad92005/saad-portfolio)** · [Remove AttendTrack GitHub link (repo now private); add live…](https://github.com/saad92005/saad-portfolio/commit/b6a9e07deb128c1e1b63a95414da806735e0c167) · Oct 5, 2026
-<!-- shipped ends -->
-
-</td><td valign="top" width="40%">
-
-#### Projects
-<!-- projects starts -->
-**[thinkdesk](https://github.com/saad92005/thinkdesk)** · [live](https://thinkdesk-three.vercel.app)<br>AI-powered knowledge workspace: RAG search, document intelligence, research mode, real AI…<br><sub>Python · last push Oct 5, 2026</sub>
-
-**[omnira](https://github.com/saad92005/omnira)**<br>Permission-gated AI desktop agent: voice + chat, tool calling, capability-based permissions.…<br><sub>TypeScript · last push Oct 5, 2026</sub>
-
-**[aes-app](https://github.com/saad92005/aes-app)**<br>Field operations & business platform for an engineering services company: work orders, GPS…<br><sub>Dart · last push Oct 5, 2026</sub>
-
-**[arabic-dialect-mt-nlp](https://github.com/saad92005/arabic-dialect-mt-nlp)**<br>Dialect Arabic → English MT on a held-out Tatoeba benchmark: fine-tuned Marian reaches BLEU…<br><sub>Python · last push Oct 5, 2026</sub>
-<!-- projects ends -->
-
-</td><td valign="top" width="24%">
-
-#### Now
-
-Fine-tuning MT models for low-resource Arabic dialects
-
-Keeping LLM API keys out of client apps
-
-Looking for an AI engineering internship or junior role
-
-</td></tr></table>
-
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/stack-light.svg">
-  <img src="assets/stack-dark.svg" width="100%" alt="How my projects are built: ThinkDesk (Next.js, FastAPI, hybrid RAG with Groq, PostgreSQL), Omnira (Tauri and React, Fastify, agent tool calls, Postgres with Prisma), AES App (Flutter, Firebase Auth, Cloud Firestore, n8n to Groq), Arabic MT (Tatoeba dialect data, MarianMT, fine-tuning, BLEU and chrF evaluation)">
-</picture>
-
-<sub>The table rebuilds itself from my real GitHub data. [How this works](build_readme.py).</sub>
