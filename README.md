@@ -16,7 +16,7 @@ I build AI software that has to work for someone other than me: agents that ask 
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=py,ts,dart,react,nextjs,flutter,fastapi,nodejs,postgres,prisma,firebase,pytorch,docker,githubactions,tauri,vercel&theme=light&perline=16">
+    <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=py%2Cts%2Cdart%2Creact%2Cnextjs%2Cflutter%2Cfastapi%2Cnodejs%2Cpostgres%2Cprisma%2Cfirebase%2Cpytorch%2Cdocker%2Cgithubactions%2Ctauri%2Cvercel&theme=light&perline=16">
     <img src="https://skillicons.dev/icons?i=py,ts,dart,react,nextjs,flutter,fastapi,nodejs,postgres,prisma,firebase,pytorch,docker,githubactions,tauri,vercel&theme=dark&perline=16" alt="Python, TypeScript, Dart, React, Next.js, Flutter, FastAPI, Node.js, PostgreSQL, Prisma, Firebase, PyTorch, Docker, GitHub Actions, Tauri, Vercel">
   </picture>
 </p>
@@ -70,4 +70,4 @@ Looking for an AI engineering internship or junior role
   <img src="assets/stack-dark.svg" width="100%" alt="How my projects are built: ThinkDesk (Next.js, FastAPI, hybrid RAG with Groq, PostgreSQL), Omnira (Tauri and React, Fastify, agent tool calls, Postgres with Prisma), AES App (Flutter, Firebase Auth, Cloud Firestore, n8n to Groq), Arabic MT (Tatoeba dialect data, MarianMT, fine-tuning, BLEU and chrF evaluation)">
 </picture>
 
-<sub>The table rebuilds themselves from my real GitHub data. [How this works](build_readme.py).</sub>
+<sub>The table rebuilds itself from my real GitHub data. [How this works](build_readme.py).</sub>
