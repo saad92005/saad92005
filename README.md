@@ -70,13 +70,20 @@ Looking for an AI engineering internship or junior role
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/stats-light.svg">
-  <img src="assets/stats-dark.svg" width="100%" alt="Contributions, public repositories and language breakdown">
+  <source media="(prefers-color-scheme: light)" srcset="assets/id-card-light.svg">
+  <img src="assets/id-card-dark.svg" width="100%" alt="ID badge with my photo, beside live GitHub numbers: contributions, public repositories and language breakdown">
 </picture>
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/activity-light.svg">
   <img src="assets/activity-dark.svg" width="100%" alt="Contribution activity over the last year">
 </picture>
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="assets/connect-light.svg">
+  <img src="assets/connect-dark.svg" width="100%" alt="Let's talk: LinkedIn and WhatsApp">
+</picture>
+
+<p align="center"><a href="https://www.linkedin.com/in/saadshahidpk"><b>LinkedIn</b></a> &nbsp;·&nbsp; <a href="https://wa.me/923214429267"><b>WhatsApp</b></a> &nbsp;·&nbsp; <a href="https://saadshahid-portfolio.vercel.app"><b>Portfolio</b></a></p>
 
 <sub>The table, numbers and activity rebuild themselves from my real GitHub data. [How this works](build_readme.py).</sub>

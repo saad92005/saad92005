@@ -110,6 +110,8 @@ def streaks(days):
 def write_all(numbers, langs, weeks, total):
     days = [d for w in weeks for d in w]
     longest, current = streaks(days)
+    import people
+    as_of = date.fromisoformat(days[-1][0]).strftime("%b %d, %Y")
+    people.write_all(THEMES, numbers, langs, as_of)
     for theme, t in THEMES.items():
-        (HERE / f"stats-{theme}.svg").write_text(stats_card(t, numbers, langs), encoding="utf-8")
         (HERE / f"activity-{theme}.svg").write_text(activity_card(t, weeks, total, longest, current), encoding="utf-8")
